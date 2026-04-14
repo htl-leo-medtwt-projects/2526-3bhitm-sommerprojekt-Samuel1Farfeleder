@@ -1,0 +1,351 @@
+:root {
+  --bg: #060708;
+  --text: #ece9e2;
+  --gold: #d7bb6f;
+  --gold-soft: #b89849;
+  --line: #2f2b1f;
+  --max: 1280px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: radial-gradient(circle at 50% -10%, #151a24 0%, var(--bg) 42%) fixed;
+  color: var(--text);
+}
+
+html {
+  font-size: 13px;
+}
+
+body {
+  font-family: "Manrope", "Segoe UI", sans-serif;
+  line-height: 1.45;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  width: min(var(--max), 96%);
+  margin: 0 auto;
+}
+
+.brand-name {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  letter-spacing: 0.01em;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(8px);
+  background: rgba(7, 8, 10, 0.88);
+  border-bottom: 1px solid var(--line);
+}
+
+.nav-shell {
+  min-height: 78px;
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+}
+
+.brand-mark {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: var(--gold);
+  color: #17120a;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 1.75rem;
+  box-shadow: 0 0 30px rgba(215, 187, 111, 0.2);
+}
+
+.brand-name {
+  font-size: 2.7rem;
+  font-weight: 700;
+  line-height: 0.9;
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  gap: clamp(16px, 2vw, 44px);
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 1.08rem;
+}
+
+.main-nav a {
+  padding: 8px 2px;
+  position: relative;
+  color: #e4e1d8;
+  transition: color 160ms ease;
+}
+
+.main-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: 100%;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 220ms ease;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+  color: var(--gold);
+}
+
+.main-nav a:hover::after,
+.main-nav a.active::after {
+  transform: scaleX(1);
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.icon-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid #2b2d32;
+  background: #1b1d21;
+  color: #d6d2c6;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: transform 160ms ease, border-color 180ms ease, color 180ms ease;
+}
+
+.icon-btn:hover {
+  transform: translateY(-2px);
+  border-color: var(--gold-soft);
+  color: var(--gold);
+}
+
+.icon-btn i {
+  font-size: 19px;
+  line-height: 1;
+}
+
+.icon-btn.icon-gold {
+  background: var(--gold);
+  color: #141106;
+  border-color: #d3b35e;
+}
+
+.site-footer {
+  background: #131418;
+}
+
+.site-footer .brand-mark {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  font-size: 1.05rem;
+}
+
+.site-footer .brand-name {
+  font-size: 1.65rem;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 0.7fr 0.7fr;
+  gap: 28px;
+  padding: 34px 0 16px;
+}
+
+.footer-grid p {
+  margin-top: 8px;
+  max-width: 500px;
+  color: #c6c7ca;
+  font-size: 1.2rem;
+}
+
+.footer-grid h3 {
+  margin: 0 0 8px;
+  font-size: 1.75rem;
+}
+
+.footer-grid ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.footer-grid li a {
+  font-size: 1.2rem;
+  color: #d2d3d6;
+}
+
+.socials {
+  display: flex;
+  gap: 8px;
+}
+
+.site-footer .icon-btn {
+  width: 36px;
+  height: 36px;
+}
+
+.site-footer .icon-btn i {
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+}
+
+.footer-bottom {
+  border-top: 1px solid var(--line);
+  text-align: center;
+  color: #c8c9cc;
+  font-size: 1.05rem;
+  padding: 11px 0;
+}
+
+.menu-toggle {
+  display: none;
+  border: 0;
+  background: transparent;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 26px;
+  height: 2px;
+  margin: 6px auto;
+  background: #ece6d8;
+}
+
+@media (max-width: 1220px) {
+  html {
+    font-size: 12.5px;
+  }
+
+  .main-nav {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 980px) {
+  html {
+    font-size: 10.5px;
+  }
+
+  .nav-shell {
+    min-height: 72px;
+  }
+
+  .brand-name {
+    font-size: 2.6rem;
+  }
+
+  .menu-toggle {
+    display: inline-block;
+    margin-left: auto;
+  }
+
+  .main-nav {
+    position: absolute;
+    left: 2%;
+    right: 2%;
+    top: 86px;
+    border: 1px solid #302a1f;
+    border-radius: 16px;
+    background: #101114;
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 14px;
+    gap: 12px;
+  }
+
+  .main-nav.open {
+    display: flex;
+  }
+
+  .main-nav a::after {
+    bottom: -5px;
+  }
+
+  .header-actions {
+    margin-left: 0;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
+
+@media (max-width: 640px) {
+  html {
+    font-size: 9.5px;
+  }
+
+  .brand-mark {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+  }
+
+  .brand-name {
+    font-size: 2.1rem;
+  }
+
+  .header-actions {
+    display: none;
+  }
+
+  .site-footer .brand-mark {
+    width: 26px;
+    height: 26px;
+    font-size: 0.95rem;
+  }
+
+  .site-footer .brand-name {
+    font-size: 1.45rem;
+  }
+
+  .site-footer .icon-btn {
+    width: 32px;
+    height: 32px;
+  }
+
+  .site-footer .icon-btn i {
+    width: 14px;
+    height: 14px;
+    font-size: 14px;
+  }
+}
