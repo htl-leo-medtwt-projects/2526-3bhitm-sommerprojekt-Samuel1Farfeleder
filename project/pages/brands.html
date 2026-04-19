@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ChronoVault | Marken</title>
+  <title>Brands | ChronoVault</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="../assets/css/home.css">
   <link rel="stylesheet" href="../assets/css/brands.css">
 </head>
 <body>
-  <header class="site-header" id="top">
+  <header class="site-header">
     <div class="nav-shell container">
       <a class="brand" href="startseite.html" aria-label="ChronoVault Startseite">
         <span class="brand-mark">C</span>
@@ -25,26 +25,105 @@
       </button>
 
       <nav class="main-nav" id="mainNav">
-        <a href="startseite.html">Startseite</a>
-        <a href="watches.html">Uhren</a>
-        <a class="active" href="brands.html">Marken</a>
-        <a href="favorites.html">Favoriten</a>
-        <a href="profile.html">Profil</a>
+        <a href="startseite.html">Home</a>
+        <a href="watches.html">Watches</a>
+        <a class="active" href="brands.html">Brands</a>
+        <a href="favorites.html">Favorites</a>
+        <a href="profile.html">Profile</a>
       </nav>
 
       <div class="header-actions" aria-label="Schnellaktionen">
-        <button class="icon-btn" id="searchBtn" aria-label="Suche" type="button">
-          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        <button class="icon-btn" id="searchBtn" aria-label="Suche">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4a7 7 0 1 0 4.47 12.39l4.57 4.57 1.41-1.41-4.57-4.57A7 7 0 0 0 11 4zm0 2a5 5 0 1 1 0 10 5 5 0 0 1 0-10z"></path></svg>
         </button>
         <a class="icon-btn" href="favorites.html" aria-label="Favoriten">
-          <i class="fa-solid fa-heart" aria-hidden="true"></i>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.1 21.35l-1.1-1C5.14 15.24 2 12.39 2 8.85 2 5.99 4.24 4 7 4c1.74 0 3.41.81 4.5 2.09C12.59 4.81 14.26 4 16 4c2.76 0 5 1.99 5 4.85 0 3.54-3.14 6.39-8.99 11.51l-1.11.99z"></path></svg>
         </a>
         <a class="icon-btn icon-gold" href="profile.html" aria-label="Profil">
-          <i class="fa-solid fa-user" aria-hidden="true"></i>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm0 2c-3.33 0-6 2.24-6 5v1h12v-1c0-2.76-2.67-5-6-5z"></path></svg>
         </a>
       </div>
     </div>
   </header>
+
+  <main>
+    <section class="brands-hero">
+      <div class="container">
+        <h1>Legendary Brands</h1>
+        <p>Explore the world's most prestigious watch manufacturers</p>
+      </div>
+    </section>
+
+    <section class="brands-grid-section section">
+      <div class="container">
+        <div class="brands-grid">
+          <article class="brand-feature" data-brand="Rolex" role="button" tabindex="0" aria-label="Rolex Details anzeigen">
+            <div class="brand-header">
+              <span class="coin">R</span>
+              <h2>Rolex</h2>
+            </div>
+            <p class="brand-founded">Est. 1905</p>
+            <p class="brand-desc">Rolex is a Swiss luxury watchmaker founded by Hans Wilsdorf. Known for precision, reliability, and iconic designs like the Submariner and Day-Date.</p>
+            <a href="watches.html" class="btn btn-ghost">View Watches</a>
+          </article>
+
+          <article class="brand-feature" data-brand="Patek Philippe" role="button" tabindex="0" aria-label="Patek Philippe Details anzeigen">
+            <div class="brand-header">
+              <span class="coin">PP</span>
+              <h2>Patek Philippe</h2>
+            </div>
+            <p class="brand-founded">Est. 1839</p>
+            <p class="brand-desc">The oldest independent watchmaker in the world. Synonymous with haute horlogerie, Patek Philippe creates some of the most coveted timepieces in existence.</p>
+            <a href="watches.html" class="btn btn-ghost">View Watches</a>
+          </article>
+
+          <article class="brand-feature" data-brand="Audemars Piguet" role="button" tabindex="0" aria-label="Audemars Piguet Details anzeigen">
+            <div class="brand-header">
+              <span class="coin">AP</span>
+              <h2>Audemars Piguet</h2>
+            </div>
+            <p class="brand-founded">Est. 1875</p>
+            <p class="brand-desc">A swiss luxury watchmaker famous for the iconic Royal Oak. Celebrated for their complex movements and innovative designs in haute horlogerie.</p>
+            <a href="watches.html" class="btn btn-ghost">View Watches</a>
+          </article>
+
+          <article class="brand-feature" data-brand="Omega" role="button" tabindex="0" aria-label="Omega Details anzeigen">
+            <div class="brand-header">
+              <span class="coin">Ω</span>
+              <h2>Omega</h2>
+            </div>
+            <p class="brand-founded">Est. 1848</p>
+            <p class="brand-desc">Official timekeeper of the Olympics and used in space exploration. Omega represents precision and performance with timeless elegance.</p>
+            <a href="watches.html" class="btn btn-ghost">View Watches</a>
+          </article>
+
+          <article class="brand-feature" data-brand="Richard Mille" role="button" tabindex="0" aria-label="Richard Mille Details anzeigen">
+            <div class="brand-header">
+              <span class="coin">RM</span>
+              <h2>Richard Mille</h2>
+            </div>
+            <p class="brand-founded">Est. 2001</p>
+            <p class="brand-desc">A relatively new brand but already a heavyweight in haute horlogerie. Known for innovative designs and cutting-edge materials in watchmaking.</p>
+            <a href="watches.html" class="btn btn-ghost">View Watches</a>
+          </article>
+
+          <article class="brand-feature" data-brand="Vacheron Constantin" role="button" tabindex="0" aria-label="Vacheron Constantin Details anzeigen">
+            <div class="brand-header">
+              <span class="coin">VC</span>
+              <h2>Vacheron Constantin</h2>
+            </div>
+            <p class="brand-founded">Est. 1755</p>
+            <p class="brand-desc">One of the oldest continuously operating watchmakers. Known for exquisite craftsmanship and some of the finest timepieces in the luxury segment.</p>
+            <a href="watches.html" class="btn btn-ghost">View Watches</a>
+          </article>
+        </div>
+
+        <section class="brand-detail" id="brandDetail" aria-live="polite">
+          <p class="brand-detail-empty">Waehle eine Marke aus, um Geschichte, Besonderheiten und Ikonen zu sehen.</p>
+        </section>
+      </div>
+    </section>
+  </main>
 
   <footer class="site-footer">
     <div class="container footer-grid">
@@ -53,38 +132,39 @@
           <span class="brand-mark">C</span>
           <span class="brand-name">ChronoVault</span>
         </a>
-        <p>ChronoVault ist deine Plattform fuer Luxusuhren. Entdecke ausgewaehlte Modelle, bekannte Manufakturen und zeitlose Klassiker an einem Ort.</p>
+        <p>Discover the world's most iconic luxury timepieces. ChronoVault is your premium platform for exploring legendary watch brands and their masterpieces.</p>
       </div>
 
       <div>
-        <h3>Entdecken</h3>
+        <h3>Explore</h3>
         <ul>
-          <li><a href="watches.html">Alle Uhren</a></li>
-          <li><a href="brands.html">Alle Marken</a></li>
-          <li><a href="favorites.html">Meine Favoriten</a></li>
-          <li><a href="profile.html">Mein Profil</a></li>
+          <li><a href="watches.html">All Watches</a></li>
+          <li><a href="brands.html">Brands</a></li>
+          <li><a href="favorites.html">Favorites</a></li>
+          <li><a href="profile.html">Profile</a></li>
         </ul>
       </div>
 
       <div>
-        <h3>Folge Uns</h3>
+        <h3>Follow Us</h3>
         <div class="socials">
-          <a class="icon-btn" href="#" aria-label="Instagram">
-            <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+          <a class="icon-btn" href="https://instagram.com/chronovault" target="_blank" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm11 1.5a1.5 1.5 0 1 1-1.5 1.5A1.5 1.5 0 0 1 18 5.5zM12 7a5 5 0 1 1-5 5 5 5 0 0 1 5-5zm0 2a3 3 0 1 0 3 3 3 3 0 0 0-3-3z"></path></svg>
           </a>
-          <a class="icon-btn" href="#" aria-label="Facebook">
-            <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
+          <a class="icon-btn" href="https://facebook.com/chronovault" target="_blank" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V5h-3c-2.21 0-4 1.79-4 4v3H7v3h3v6h3v-6h3l1-3h-4V9a1 1 0 0 1 1-1z"></path></svg>
           </a>
-          <a class="icon-btn" href="#" aria-label="X">
-            <i class="fa-brands fa-x-twitter" aria-hidden="true"></i>
+          <a class="icon-btn" href="https://twitter.com/chronovault" target="_blank" aria-label="X">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-6.76 7.73L23 22h-6.08l-4.76-6.23L6.7 22H3.58l7.23-8.25L1 2h6.23l4.3 5.67z"></path></svg>
           </a>
         </div>
       </div>
     </div>
 
-    <div class="container footer-bottom">Copyright 2026 ChronoVault. Alle Rechte vorbehalten.</div>
+    <div class="container footer-bottom">&copy; 2026 ChronoVault. All rights reserved. Luxury Timepiece Discovery Platform.</div>
   </footer>
 
   <script src="../assets/js/home.js"></script>
+  <script src="../assets/js/brands.js"></script>
 </body>
 </html>
