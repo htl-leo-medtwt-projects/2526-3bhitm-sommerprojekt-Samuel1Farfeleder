@@ -8,10 +8,16 @@ if (menuToggle && mainNav) {
   });
 }
 
-
+// Search button navigation
 const searchBtn = document.querySelector("#searchBtn");
 if (searchBtn) {
   searchBtn.addEventListener("click", () => {
     window.location.href = "watches.html";
   });
 }
+
+document.querySelectorAll(".heart-btn").forEach((button) => {
+  button.addEventListener("click", () => {
+    button.classList.toggle("is-active");
+  });
+});
