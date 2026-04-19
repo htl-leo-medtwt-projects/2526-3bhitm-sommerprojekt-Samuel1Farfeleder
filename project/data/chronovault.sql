@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db_server
--- Erstellungszeit: 07. Apr 2026 um 13:36
+-- Erstellungszeit: 19. Apr 2026 um 17:35
 -- Server-Version: 9.3.0
 -- PHP-Version: 8.2.27
 
@@ -41,12 +41,12 @@ CREATE TABLE `brands` (
 --
 
 INSERT INTO `brands` (`id`, `name`, `founded_year`, `country`, `description`, `created_at`) VALUES
-(1, 'Rolex', 1905, 'Switzerland', 'Rolex is known for precision and iconic sports watches.', '2026-04-01 11:22:59'),
-(2, 'Patek Philippe', 1839, 'Switzerland', 'Independent Swiss high-end watchmaker with deep heritage.', '2026-04-01 11:23:41'),
-(3, 'Audemars Piguet', 1875, 'Switzerland', 'Avant-garde haute horlogerie, famous for Royal Oak.', '2026-04-01 11:46:21'),
-(4, 'Omega', 1848, 'Switzerland', 'Strong chronometry and space-exploration legacy.', '2026-04-01 11:50:32'),
-(5, 'Richard Mille', 2001, 'Switzerland', 'High-tech materials and modern luxury watchmaking.', '2026-04-01 11:56:43'),
-(6, 'Vacheron Constantin', 1755, 'Switzerland', 'One of the oldest continuously operating maisons.', '2026-04-01 12:02:21');
+(1, 'Rolex', 1905, 'Switzerland', 'Rolex is known for precision and iconic sports watches.', '2026-04-14 18:20:50'),
+(2, 'Patek Philippe', 1839, 'Switzerland', 'Independent Swiss high-end watchmaker with deep heritage.', '2026-04-14 18:20:50'),
+(3, 'Audemars Piguet', 1875, 'Switzerland', 'Avant-garde haute horlogerie, famous for Royal Oak.', '2026-04-14 18:20:50'),
+(4, 'Omega', 1848, 'Switzerland', 'Strong chronometry and space-exploration legacy.', '2026-04-14 18:20:50'),
+(5, 'Richard Mille', 2001, 'Switzerland', 'High-tech materials and modern luxury watchmaking.', '2026-04-14 18:20:50'),
+(6, 'Vacheron Constantin', 1755, 'Switzerland', 'One of the oldest continuously operating maisons.', '2026-04-14 18:20:50');
 
 -- --------------------------------------------------------
 
@@ -66,8 +66,24 @@ CREATE TABLE `favorites` (
 --
 
 INSERT INTO `favorites` (`id`, `user_id`, `watch_id`, `created_at`) VALUES
-(1, 1, 1, '2026-04-01 12:12:43'),
-(2, 1, 3, '2026-04-01 12:15:41');
+(1, 1, 1, '2026-04-14 18:20:50'),
+(2, 1, 3, '2026-04-14 18:20:50'),
+(4, 1, 10, '2026-04-14 18:28:41'),
+(5, 1, 4, '2026-04-14 18:28:43'),
+(6, 1, 9, '2026-04-14 18:28:44'),
+(7, 3, 10, '2026-04-14 18:35:28'),
+(8, 3, 3, '2026-04-14 18:35:34'),
+(9, 3, 4, '2026-04-14 18:35:36'),
+(10, 3, 9, '2026-04-14 18:35:37'),
+(11, 3, 6, '2026-04-14 18:35:38'),
+(12, 4, 10, '2026-04-14 18:48:01'),
+(13, 4, 9, '2026-04-14 18:48:03'),
+(14, 4, 4, '2026-04-14 18:48:04'),
+(15, 4, 6, '2026-04-14 18:48:03'),
+(16, 4, 3, '2026-04-15 06:49:41'),
+(17, 4, 11, '2026-04-15 06:49:54'),
+(18, 4, 5, '2026-04-15 06:49:56'),
+(19, 4, 2, '2026-04-16 06:33:37');
 
 -- --------------------------------------------------------
 
@@ -89,8 +105,8 @@ CREATE TABLE `reviews` (
 --
 
 INSERT INTO `reviews` (`id`, `user_id`, `watch_id`, `rating`, `comment`, `created_at`) VALUES
-(1, 1, 1, 5, 'An absolute masterpiece. The build quality is unmatched, and it looks stunning on the wrist.', '2026-04-01 12:42:21'),
-(2, 1, 1, 5, 'Worth every penny. The classic design never goes out of style.', '2026-04-01 12:44:34');
+(1, 1, 1, 5, 'An absolute masterpiece. The build quality is unmatched, and it looks stunning on the wrist.', '2026-04-14 18:20:50'),
+(2, 1, 1, 5, 'Worth every penny. The classic design never goes out of style.', '2026-04-14 18:20:50');
 
 -- --------------------------------------------------------
 
@@ -102,6 +118,7 @@ CREATE TABLE `users` (
   `id` int UNSIGNED NOT NULL,
   `username` varchar(80) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(190) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password_hash` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -109,8 +126,11 @@ CREATE TABLE `users` (
 -- Daten für Tabelle `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `email`, `created_at`) VALUES
-(1, 'Samuel', 'Samuelfarfeleder@gmail.com', '2026-04-01 12:32:53');
+INSERT INTO `users` (`id`, `username`, `email`, `password_hash`, `created_at`) VALUES
+(1, 'Watch Enthusiast', 'demo@chronovault.com', NULL, '2026-04-14 18:20:50'),
+(2, 'TestUser', 'test@example.com', '$2y$10$1/y1QWFiRmlahF38Svk4kea/xwKd6jy7hSwcpfYU7MRwN1whZL7eq', '2026-04-14 18:27:54'),
+(3, 'it230197', 'samuelfarfeleder1709@gmail.com', '$2y$10$gZpDAE6SPfNxg.A4pwEfNOIDriWmGCZRzKbvtWsG6Uvuu9BFdUTRu', '2026-04-14 18:29:07'),
+(4, 'Samuel', 'samuelfarfeleder@gmail.com', '$2y$10$wlaJJu6Jd8F9c439b69f1esVe.f.Us7hLSsqTYmXp0QnKbBNMb396', '2026-04-14 18:47:55');
 
 -- --------------------------------------------------------
 
@@ -126,26 +146,27 @@ CREATE TABLE `watches` (
   `price_usd` decimal(12,2) DEFAULT NULL,
   `movement` varchar(160) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `description` text COLLATE utf8mb4_unicode_ci,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `pic` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Daten für Tabelle `watches`
 --
 
-INSERT INTO `watches` (`id`, `brand_id`, `model`, `production_year`, `price_usd`, `movement`, `description`, `created_at`) VALUES
-(1, 1, 'Submariner Date', 2023, 14300.00, 'Automatic Caliber 3235', 'The quintessential diving watch with timeless design.', '2026-04-03 11:12:54'),
-(2, 2, 'Nautilus 5711', 2021, 32000.00, 'Caliber 26-330 S C', 'One of the most iconic luxury sports watches.', '2026-04-03 11:32:23'),
-(3, 3, 'Royal Oak', 2022, 27500.00, 'Caliber 4302', 'A benchmark for integrated bracelet sports watches.', '2026-04-03 11:53:34'),
-(4, 4, 'Seamaster Diver 300M', 2023, 6400.00, 'Omega Co-Axial Master Chronometer', 'Professional dive watch with modern engineering.', '2026-04-03 12:02:15'),
-(5, 1, 'Daytona Cosmograph', 2024, 15500.00, 'Caliber 4131', 'Rolex chronograph icon with motorsport DNA.', '2026-04-03 12:09:51'),
-(6, 2, 'Aquanaut', 2020, 26000.00, 'Caliber 26-330 S C', 'Contemporary luxury sports model by Patek Philippe.', '2026-04-03 12:32:23'),
-(7, 5, 'RM 011', 2022, 220000.00, 'Automatic Flyback Chronograph', 'A modern high-tech statement piece by Richard Mille.', '2026-04-03 13:04:05'),
-(8, 6, 'Overseas', 2023, 28000.00, 'Caliber 5100', 'Elegant luxury sports watch from Vacheron Constantin.', '2026-04-03 13:22:43'),
-(9, 4, 'Speedmaster', 2021, 7200.00, 'Caliber 3861', 'Moonwatch heritage with Master Chronometer movement.', '2026-04-03 13:32:14'),
-(10, 3, 'Code 11.59', 2024, 30500.00, 'Caliber 4302', 'Modern AP design with high finishing quality.', '2026-04-03 13:42:14'),
-(11, 1, 'Day-Date 40', 2023, 42000.00, 'Caliber 3255', 'Flagship Rolex classic in precious metals.', '2026-04-03 14:22:54'),
-(12, 2, 'Calatrava', 2022, 29000.00, 'Caliber 30-255 PS', 'Classic dress watch with timeless proportions.', '2026-04-03 14:52:21');
+INSERT INTO `watches` (`id`, `brand_id`, `model`, `production_year`, `price_usd`, `movement`, `description`, `created_at`, `pic`) VALUES
+(1, 1, 'Submariner Date', 2023, 14300.00, 'Automatic Caliber 3235', 'The quintessential diving watch with timeless design.', '2026-04-14 18:20:50', 'https://www.smwild.at/rolex/submariner-date-m126610ln-0001/'),
+(2, 2, 'Nautilus 5711', 2021, 32000.00, 'Caliber 26-330 S C', 'One of the most iconic luxury sports watches.', '2026-04-14 18:20:50', 'https://www.hautehorlogerie.org/zh/watches-and-culture/watchmaking-scene/watches-and-novelties/nautilus-5711-1300a-001'),
+(3, 3, 'Royal Oak', 2022, 27500.00, 'Caliber 4302', 'A benchmark for integrated bracelet sports watches.', '2026-04-14 18:20:50', 'https://time4diamonds.com/products/audemars-piguet-royal-oak-41-stainless-steel-white-dial-15400st-oo-1220st-02'),
+(4, 4, 'Seamaster Diver 300M', 2023, 6400.00, 'Omega Co-Axial Master Chronometer', 'Professional dive watch with modern engineering.', '2026-04-14 18:20:50', 'https://weikhard.at/products/seamaster-diver-300m-2?srsltid=AfmBOooPoX_3RVt9ua3Ef_CwllydCP_Fkua5AhCeZrgaUuQa5IWZDIWS'),
+(5, 1, 'Daytona Cosmograph', 2024, 15500.00, 'Caliber 4131', 'Rolex chronograph icon with motorsport DNA.', '2026-04-14 18:20:50', 'https://schullin.com/en/rolex/cosmograph-daytona-m126509-0001/?srsltid=AfmBOoo5t9oIJ8PgHYmaYX6E2GB551HrpXfiMpNreQGUmAOqwk9UIic3'),
+(6, 2, 'Aquanaut', 2020, 26000.00, 'Caliber 26-330 S C', 'Contemporary luxury sports model by Patek Philippe.', '2026-04-14 18:20:50', 'https://www.patek.com/en/collection/aquanaut/all-watches'),
+(7, 5, 'RM 011', 2022, 220000.00, 'Automatic Flyback Chronograph', 'A modern high-tech statement piece by Richard Mille.', '2026-04-14 18:20:50', 'https://www.luxewatches.co.uk/shop/richard-mille/richard-mille-rm-11-03-automatic-flyback-chronograph-titanium/'),
+(8, 6, 'Overseas', 2023, 28000.00, 'Caliber 5100', 'Elegant luxury sports watch from Vacheron Constantin.', '2026-04-14 18:20:50', 'https://thewatchfirm.at/de/products/vacheron-constantin-overseas-dual-time-41mm-steel-automatic-watch-7920v-210a-b334'),
+(9, 4, 'Speedmaster', 2021, 7200.00, 'Caliber 3861', 'Moonwatch heritage with Master Chronometer movement.', '2026-04-14 18:20:50', 'https://www.omegawatches.com/media/wysiwyg/video/31030425004001-product-video-desktop-low.mp4'),
+(10, 3, 'Code 11.59', 2024, 30500.00, 'Caliber 4302', 'Modern AP design with high finishing quality.', '2026-04-14 18:20:50', 'https://www.audemarspiguet.com/com/de/collections/code-11-59-collection.html'),
+(11, 1, 'Day-Date 40', 2023, 42000.00, 'Caliber 3255', 'Flagship Rolex classic in precious metals.', '2026-04-14 18:20:50', 'https://www.smwild.at/rolex/day-date-40-m228239-0033/'),
+(12, 2, 'Calatrava', 2022, 29000.00, 'Caliber 30-255 PS', 'Classic dress watch with timeless proportions.', '2026-04-14 18:20:50', 'https://patek-res.cloudinary.com/dfsmedia/0906caea301d42b3b8bd23bd656d1711/7336-51887');
 
 --
 -- Indizes der exportierten Tabellen
@@ -204,7 +225,7 @@ ALTER TABLE `brands`
 -- AUTO_INCREMENT für Tabelle `favorites`
 --
 ALTER TABLE `favorites`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT für Tabelle `reviews`
@@ -216,13 +237,13 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT für Tabelle `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT für Tabelle `watches`
 --
 ALTER TABLE `watches`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints der exportierten Tabellen
