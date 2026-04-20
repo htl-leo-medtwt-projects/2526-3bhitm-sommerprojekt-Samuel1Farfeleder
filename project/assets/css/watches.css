@@ -64,6 +64,8 @@
   border: 1px solid var(--line);
   border-radius: 16px;
   padding: 20px;
+  position: sticky;
+  top: calc(78px + 24px);
 }
 
 .filters-header {
