@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db_server
--- Erstellungszeit: 19. Apr 2026 um 17:35
+-- Erstellungszeit: 20. Apr 2026 um 14:49
 -- Server-Version: 9.3.0
 -- PHP-Version: 8.2.27
 
@@ -155,18 +155,18 @@ CREATE TABLE `watches` (
 --
 
 INSERT INTO `watches` (`id`, `brand_id`, `model`, `production_year`, `price_usd`, `movement`, `description`, `created_at`, `pic`) VALUES
-(1, 1, 'Submariner Date', 2023, 14300.00, 'Automatic Caliber 3235', 'The quintessential diving watch with timeless design.', '2026-04-14 18:20:50', 'https://www.smwild.at/rolex/submariner-date-m126610ln-0001/'),
-(2, 2, 'Nautilus 5711', 2021, 32000.00, 'Caliber 26-330 S C', 'One of the most iconic luxury sports watches.', '2026-04-14 18:20:50', 'https://www.hautehorlogerie.org/zh/watches-and-culture/watchmaking-scene/watches-and-novelties/nautilus-5711-1300a-001'),
-(3, 3, 'Royal Oak', 2022, 27500.00, 'Caliber 4302', 'A benchmark for integrated bracelet sports watches.', '2026-04-14 18:20:50', 'https://time4diamonds.com/products/audemars-piguet-royal-oak-41-stainless-steel-white-dial-15400st-oo-1220st-02'),
-(4, 4, 'Seamaster Diver 300M', 2023, 6400.00, 'Omega Co-Axial Master Chronometer', 'Professional dive watch with modern engineering.', '2026-04-14 18:20:50', 'https://weikhard.at/products/seamaster-diver-300m-2?srsltid=AfmBOooPoX_3RVt9ua3Ef_CwllydCP_Fkua5AhCeZrgaUuQa5IWZDIWS'),
-(5, 1, 'Daytona Cosmograph', 2024, 15500.00, 'Caliber 4131', 'Rolex chronograph icon with motorsport DNA.', '2026-04-14 18:20:50', 'https://schullin.com/en/rolex/cosmograph-daytona-m126509-0001/?srsltid=AfmBOoo5t9oIJ8PgHYmaYX6E2GB551HrpXfiMpNreQGUmAOqwk9UIic3'),
-(6, 2, 'Aquanaut', 2020, 26000.00, 'Caliber 26-330 S C', 'Contemporary luxury sports model by Patek Philippe.', '2026-04-14 18:20:50', 'https://www.patek.com/en/collection/aquanaut/all-watches'),
-(7, 5, 'RM 011', 2022, 220000.00, 'Automatic Flyback Chronograph', 'A modern high-tech statement piece by Richard Mille.', '2026-04-14 18:20:50', 'https://www.luxewatches.co.uk/shop/richard-mille/richard-mille-rm-11-03-automatic-flyback-chronograph-titanium/'),
-(8, 6, 'Overseas', 2023, 28000.00, 'Caliber 5100', 'Elegant luxury sports watch from Vacheron Constantin.', '2026-04-14 18:20:50', 'https://thewatchfirm.at/de/products/vacheron-constantin-overseas-dual-time-41mm-steel-automatic-watch-7920v-210a-b334'),
-(9, 4, 'Speedmaster', 2021, 7200.00, 'Caliber 3861', 'Moonwatch heritage with Master Chronometer movement.', '2026-04-14 18:20:50', 'https://www.omegawatches.com/media/wysiwyg/video/31030425004001-product-video-desktop-low.mp4'),
-(10, 3, 'Code 11.59', 2024, 30500.00, 'Caliber 4302', 'Modern AP design with high finishing quality.', '2026-04-14 18:20:50', 'https://www.audemarspiguet.com/com/de/collections/code-11-59-collection.html'),
-(11, 1, 'Day-Date 40', 2023, 42000.00, 'Caliber 3255', 'Flagship Rolex classic in precious metals.', '2026-04-14 18:20:50', 'https://www.smwild.at/rolex/day-date-40-m228239-0033/'),
-(12, 2, 'Calatrava', 2022, 29000.00, 'Caliber 30-255 PS', 'Classic dress watch with timeless proportions.', '2026-04-14 18:20:50', 'https://patek-res.cloudinary.com/dfsmedia/0906caea301d42b3b8bd23bd656d1711/7336-51887');
+(1, 1, 'Submariner Date', 2023, 14300.00, 'Automatic Caliber 3235', 'The quintessential diving watch with timeless design.', '2026-04-14 18:20:50', 'https://www.rabat.net/media/catalog/product/r/o/rolex-submariner-m126613lb-0002.png\r\n'),
+(2, 2, 'Nautilus 5711', 2021, 32000.00, 'Caliber 26-330 S C', 'One of the most iconic luxury sports watches.', '2026-04-14 18:20:50', 'https://assets.hautehorlogerie.org/md/73c77374-274c-5c34-cf9e-1c9f3c4adfdd.png'),
+(3, 3, 'Royal Oak', 2022, 27500.00, 'Caliber 4302', 'A benchmark for integrated bracelet sports watches.', '2026-04-14 18:20:50', 'https://assets.hautehorlogerie.org/xl/66c22399-d017-c34b-52b4-b3f9bfe00304.png'),
+(4, 4, 'Seamaster Diver 300M', 2023, 6400.00, 'Omega Co-Axial Master Chronometer', 'Professional dive watch with modern engineering.', '2026-04-14 18:20:50', 'https://vonkoeck.com/wp-content/uploads/2024/03/products-118198.png'),
+(5, 1, 'Daytona Cosmograph', 2024, 15500.00, 'Caliber 4131', 'Rolex chronograph icon with motorsport DNA.', '2026-04-14 18:20:50', 'https://asset.bucherer.com/image/upload/f_auto,w_1620/Assets/Watches/ROLEX/Rolex/Automatic/m126500ln-0001_FP.webp'),
+(6, 2, 'Aquanaut', 2020, 26000.00, 'Caliber 26-330 S C', 'Contemporary luxury sports model by Patek Philippe.', '2026-04-14 18:20:50', 'https://res.cloudinary.com/wc-photo/image/upload/v1707278115/product/3ac12dbd49b6f89dd1cb0945fdf2fb4b/2850869c821d9327910c2144f8de3102.png'),
+(7, 5, 'RM 011', 2022, 220000.00, 'Automatic Flyback Chronograph', 'A modern high-tech statement piece by Richard Mille.', '2026-04-14 18:20:50', 'https://amz.luxewatches.co.uk/app/uploads/2021/09/17154552/Richard-Mille-RM-11-01-LW9583-F-4-1.png'),
+(8, 6, 'Overseas', 2023, 28000.00, 'Caliber 5100', 'Elegant luxury sports watch from Vacheron Constantin.', '2026-04-14 18:20:50', 'https://www.vacheron-constantin.com/dam/rcq/vac/Ic/V0/Ik/vD/xE/ek/5W/vG/JO/l4/Jw/IcV0IkvDxEek5WvGJOl4Jw.png.transform.vaccard.png'),
+(9, 4, 'Speedmaster', 2021, 7200.00, 'Caliber 3861', 'Moonwatch heritage with Master Chronometer movement.', '2026-04-14 18:20:50', 'https://vonkoeck.com/wp-content/uploads/2025/03/119628.png'),
+(10, 3, 'Code 11.59', 2024, 30500.00, 'Caliber 4302', 'Modern AP design with high finishing quality.', '2026-04-14 18:20:50', 'https://www.audemarspiguet.com/content/dam/ap/com/products/watches/MTR009695AB/importer/watch.png.transform.appdpmain.png'),
+(11, 1, 'Day-Date 40', 2023, 42000.00, 'Caliber 3255', 'Flagship Rolex classic in precious metals.', '2026-04-14 18:20:50', 'https://www.smwild.at/wp-content/uploads/rolex-upload-tool/rolex_watch_assets/upright_watch_assets_landscape/m228239-0033.webp'),
+(12, 2, 'Calatrava', 2022, 29000.00, 'Caliber 30-255 PS', 'Classic dress watch with timeless proportions.', '2026-04-14 18:20:50', 'https://www.chronoto.de/uploads/images/f-5/ce7/ff4/f-5ce7ff493243a2.30685795.png');
 
 --
 -- Indizes der exportierten Tabellen

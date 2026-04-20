@@ -1,4 +1,22 @@
-const watchesData = [];
+let watchesData = [];
+
+async function loadWatchesFromDb() {
+  try {
+    const response = await fetch("../api/watches.php", {
+      headers: { Accept: "application/json" },
+    });
+
+    if (!response.ok) {
+      watchesData = [];
+      return;
+    }
+
+    const payload = await response.json();
+    watchesData = Array.isArray(payload.watches) ? payload.watches : [];
+  } catch (_error) {
+    watchesData = [];
+  }
+}
 
 function renderWatches(data) {
   const grid = document.getElementById("watchesGrid");
@@ -83,7 +101,7 @@ function resetFilters() {
   filterWatches();
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   document.querySelectorAll(".brand-check").forEach((checkbox) => {
     checkbox.addEventListener("change", filterWatches);
   });
@@ -106,5 +124,6 @@ document.addEventListener("DOMContentLoaded", () => {
     resetBtn.addEventListener("click", resetFilters);
   }
 
+  await loadWatchesFromDb();
   filterWatches();
 });
