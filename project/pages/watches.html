@@ -46,6 +46,93 @@
     </div>
   </header>
 
+  <main>
+    <section class="watches-hero">
+      <div class="container">
+        <h1>Watch Collection</h1>
+        <p>Filtere die Uhren nach Marke und Baujahr.</p>
+      </div>
+    </section>
+
+    <section class="watches-content">
+      <div class="container watches-layout">
+        <aside class="filters-panel">
+          <div class="filters-header">
+            <h2>Filters</h2>
+            <button class="reset-btn" id="resetBtn" type="button">Reset</button>
+          </div>
+
+          <div class="filter-group">
+            <h3>Brand</h3>
+            <div class="checkbox-group">
+              <label class="checkbox-label">
+                <input type="checkbox" class="brand-check" value="Rolex">
+                <span>Rolex</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" class="brand-check" value="Patek Philippe">
+                <span>Patek Philippe</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" class="brand-check" value="Audemars Piguet">
+                <span>Audemars Piguet</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" class="brand-check" value="Omega">
+                <span>Omega</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" class="brand-check" value="Richard Mille">
+                <span>Richard Mille</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" class="brand-check" value="Vacheron Constantin">
+                <span>Vacheron Constantin</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <h3>Year Range</h3>
+            <div class="year-inputs">
+              <div class="year-field">
+                <label for="yearFrom">From</label>
+                <select id="yearFrom" aria-label="Von Jahr">
+                  <option value="">Select year</option>
+                  <option value="2019">2019</option>
+                  <option value="2020">2020</option>
+                  <option value="2021">2021</option>
+                  <option value="2022">2022</option>
+                  <option value="2023">2023</option>
+                  <option value="2024">2024</option>
+                </select>
+              </div>
+              <div class="year-field">
+                <label for="yearTo">To</label>
+                <select id="yearTo" aria-label="Bis Jahr">
+                  <option value="">Select year</option>
+                  <option value="2019">2019</option>
+                  <option value="2020">2020</option>
+                  <option value="2021">2021</option>
+                  <option value="2022">2022</option>
+                  <option value="2023">2023</option>
+                  <option value="2024">2024</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <div class="watches-main">
+          <div class="results-info">
+            <span id="resultCount">0 watches found</span>
+          </div>
+          <div class="watches-grid" id="watchesGrid"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
   <footer class="site-footer">
     <div class="container footer-grid">
       <div>
@@ -86,5 +173,6 @@
   </footer>
 
   <script src="../assets/js/home.js"></script>
+  <script src="../assets/js/watches.js"></script>
 </body>
 </html>
