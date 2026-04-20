@@ -17,6 +17,37 @@
   font-size: clamp(1rem, 1.8vw, 1.7rem);
 }
 
+.search-box {
+  margin-top: 22px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #1a1c21;
+  border: 1px solid #383530;
+  border-radius: 12px;
+  padding: 0 14px;
+  height: 52px;
+}
+
+.search-box i {
+  color: #a8a9ad;
+  font-size: 1.4rem;
+}
+
+.search-box input {
+  flex: 1;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font-size: 1.45rem;
+  font-family: inherit;
+  outline: none;
+}
+
+.search-box input::placeholder {
+  color: #7a7b7f;
+}
+
 .watches-content {
   padding: 40px 0;
 }

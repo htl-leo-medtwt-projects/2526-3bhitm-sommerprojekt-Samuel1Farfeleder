@@ -49,11 +49,16 @@ function filterWatches() {
   const selectedBrands = Array.from(document.querySelectorAll(".brand-check:checked")).map((item) => item.value);
   const yearFrom = parseInt(document.getElementById("yearFrom")?.value || "", 10) || 0;
   const yearTo = parseInt(document.getElementById("yearTo")?.value || "", 10) || 9999;
+  const searchTerm = (document.getElementById("searchInput")?.value || "").trim().toLowerCase();
 
   const filtered = watchesData.filter((watch) => {
     const brandMatches = selectedBrands.length === 0 || selectedBrands.includes(watch.brand);
     const yearMatches = watch.year >= yearFrom && watch.year <= yearTo;
-    return brandMatches && yearMatches;
+    const textMatches =
+      searchTerm === "" ||
+      watch.brand.toLowerCase().includes(searchTerm) ||
+      watch.model.toLowerCase().includes(searchTerm);
+    return brandMatches && yearMatches && textMatches;
   });
 
   renderWatches(filtered);
@@ -71,6 +76,10 @@ function resetFilters() {
   if (yearTo) {
     yearTo.value = "";
   }
+  const searchInput = document.getElementById("searchInput");
+  if (searchInput) {
+    searchInput.value = "";
+  }
   filterWatches();
 }
 
@@ -81,6 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const yearFrom = document.getElementById("yearFrom");
   const yearTo = document.getElementById("yearTo");
+  const searchInput = document.getElementById("searchInput");
   const resetBtn = document.getElementById("resetBtn");
 
   if (yearFrom) {
@@ -88,6 +98,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   if (yearTo) {
     yearTo.addEventListener("change", filterWatches);
+  }
+  if (searchInput) {
+    searchInput.addEventListener("input", filterWatches);
   }
   if (resetBtn) {
     resetBtn.addEventListener("click", resetFilters);
