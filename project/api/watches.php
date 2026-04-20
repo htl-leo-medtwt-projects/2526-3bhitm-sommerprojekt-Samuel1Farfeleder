@@ -15,11 +15,12 @@ $watchListSql = '
         b.name AS brand,
         w.model,
         w.production_year AS year,
+        w.pic,
         COALESCE(ROUND(AVG(r.rating)), 5) AS rating
     FROM watches w
     JOIN brands b ON b.id = w.brand_id
     LEFT JOIN reviews r ON r.watch_id = w.id
-    GROUP BY w.id, b.name, w.model, w.production_year
+    GROUP BY w.id, b.name, w.model, w.production_year, w.pic
     ORDER BY b.name, w.model
 ';
 
@@ -37,6 +38,7 @@ while ($row = $queryResult->fetch_assoc()) {
         'brand' => (string) $row['brand'],
         'model' => (string) $row['model'],
         'year' => (int) $row['year'],
+        'pic' => str_replace(["\r", "\n"], '', trim((string) ($row['pic'] ?? ''))),
         'rating' => max(1, min(5, (int) $row['rating'])),
     ];
 }

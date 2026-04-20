@@ -45,7 +45,9 @@ function renderWatches(data) {
       return `
         <article class="watch-card">
           <a class="watch-link" href="watch-detail.html?${query}" aria-label="${watch.brand} ${watch.model} ansehen">
-            <div class="watch-media"></div>
+            <div class="watch-media">
+              ${watch.pic ? `<img class="watch-image" src="${watch.pic}" alt="${watch.brand} ${watch.model}" loading="lazy">` : ""}
+            </div>
             <div class="watch-info">
               <small>${watch.brand}</small>
               <h3>${watch.model}</h3>
@@ -61,6 +63,12 @@ function renderWatches(data) {
     .join("");
 
   resultCount.textContent = `${data.length} watches found`;
+
+  document.querySelectorAll(".watch-image").forEach((image) => {
+    image.addEventListener("error", () => {
+      image.style.display = "none";
+    });
+  });
 }
 
 function filterWatches() {
