@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db_server
--- Erstellungszeit: 20. Apr 2026 um 14:49
+-- Erstellungszeit: 21. Apr 2026 um 14:20
 -- Server-Version: 9.3.0
 -- PHP-Version: 8.2.27
 
@@ -166,7 +166,15 @@ INSERT INTO `watches` (`id`, `brand_id`, `model`, `production_year`, `price_usd`
 (9, 4, 'Speedmaster', 2021, 7200.00, 'Caliber 3861', 'Moonwatch heritage with Master Chronometer movement.', '2026-04-14 18:20:50', 'https://vonkoeck.com/wp-content/uploads/2025/03/119628.png'),
 (10, 3, 'Code 11.59', 2024, 30500.00, 'Caliber 4302', 'Modern AP design with high finishing quality.', '2026-04-14 18:20:50', 'https://www.audemarspiguet.com/content/dam/ap/com/products/watches/MTR009695AB/importer/watch.png.transform.appdpmain.png'),
 (11, 1, 'Day-Date 40', 2023, 42000.00, 'Caliber 3255', 'Flagship Rolex classic in precious metals.', '2026-04-14 18:20:50', 'https://www.smwild.at/wp-content/uploads/rolex-upload-tool/rolex_watch_assets/upright_watch_assets_landscape/m228239-0033.webp'),
-(12, 2, 'Calatrava', 2022, 29000.00, 'Caliber 30-255 PS', 'Classic dress watch with timeless proportions.', '2026-04-14 18:20:50', 'https://www.chronoto.de/uploads/images/f-5/ce7/ff4/f-5ce7ff493243a2.30685795.png');
+(12, 2, 'Calatrava', 2022, 29000.00, 'Caliber 30-255 PS', 'Classic dress watch with timeless proportions.', '2026-04-14 18:20:50', 'https://www.chronoto.de/uploads/images/f-5/ce7/ff4/f-5ce7ff493243a2.30685795.png'),
+(13, 1, 'Explorer II', 2023, 11300.00, 'Automatic Caliber 3285', 'Tool watch built for legibility and dual-time use.', '2026-04-21 14:05:39', 'https://asset.bucherer.com/image/upload/f_auto,w_1620/Assets/Watches/ROLEX/Rolex/Automatic/m226570-0001_FP.webp'),
+(14, 1, 'GMT-Master II', 2024, 16200.00, 'Automatic Caliber 3285', 'Versatile traveler\'s watch with a dual-time bezel.', '2026-04-21 14:05:39', 'https://www.smwild.at/wp-content/uploads/rolex-upload-tool/rolex_watch_assets/upright_watch_assets_portrait/m126713grnr-0001.webp'),
+(15, 2, 'Twenty~4 Automatic', 2022, 33000.00, 'Caliber 324 S C', 'Elegant and modern luxury watch with a refined profile.', '2026-04-21 14:05:39', 'https://cdn2.chrono24.com/cdn-cgi/image/f=auto,metadata=none,q=65,h=305/images/topmodels/449-h6zmubexdvq5r0bmkn6hb153-Original.png'),
+(16, 3, 'Royal Oak Offshore', 2021, 38500.00, 'Caliber 4401', 'Bold chronograph variant with strong wrist presence.', '2026-04-21 14:05:39', 'https://www.audemarspiguet.com/content/dam/ap/com/products/watches/MTR009790.00/importer/standup.png.transform.approductmain.png'),
+(17, 4, 'Constellation', 2022, 5200.00, 'Omega Co-Axial Master Chronometer', 'Elegant dress-sport model with strong everyday wearability.', '2026-04-21 14:05:39', 'https://vonkoeck.com/wp-content/uploads/2024/11/119398.png'),
+(18, 5, 'RM 35-01', 2021, 195000.00, 'Manual Winding Skeletonized Movement', 'Lightweight haute horlogerie piece with a bold profile.', '2026-04-21 14:05:39', 'https://res.cloudinary.com/wc-photo/image/upload/v1752571877/product/0b76a8cfc2050c5e459aed2aec089cc8/617c5f5a204dc13c919ae60844443a0b.png'),
+(19, 6, 'Patrimony', 2024, 24000.00, 'Caliber 2450 Q6', 'Minimalist dress watch with refined proportions.', '2026-04-21 14:05:39', 'https://www.vacheron-constantin.com/dam/rcq/vac/43/16/54/431654.png.transform.vacdetail.png'),
+(20, 4, 'Speedmaster Moonwatch', 2023, 7800.00, 'Caliber 3861', 'Classic chronograph with space-exploration heritage.', '2026-04-21 14:05:39', 'https://de9mvi9pqgvkh.cloudfront.net/media/catalog/product/cache/435936c762cb3065f86a2e52a9f7d6e2/P/r/Pre-Owned-1504_Omega_1.png');
 
 --
 -- Indizes der exportierten Tabellen
@@ -243,7 +251,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT für Tabelle `watches`
 --
 ALTER TABLE `watches`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Constraints der exportierten Tabellen
