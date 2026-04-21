@@ -1,7 +1,9 @@
 # Sprint-Doku
-
+- Samuel Farfeleder
+- https://github.com/htl-leo-medtwt-projects/2526-3bhitm-sommerprojekt-Samuel1Farfeleder.git
 ## Projekt
 ChronoVault
+
 
 ## Stand: Fertige Seiten
 
