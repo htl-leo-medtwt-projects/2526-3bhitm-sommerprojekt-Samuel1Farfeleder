@@ -1,6 +1,7 @@
 const USER_ID = 1
 
 let currentWatch = null
+let selectedRating = 0
 
 function getApiBase() {
   const path = window.location.pathname
@@ -20,24 +21,32 @@ async function loadWatchDetail() {
 
   try {
     const apiBase = getApiBase()
-    const response = await fetch(`${apiBase}/api/watches.php`, {
+    const response = await fetch(`${apiBase}/api/watches.php?id=${watchId}`, {
       headers: { Accept: 'application/json' },
     })
 
     if (!response.ok) {
-      throw new Error('Failed to load watches list')
+      throw new Error('Failed to load watch')
     }
 
     const payload = await response.json()
-    const watches = Array.isArray(payload.watches) ? payload.watches : []
-    const found = watches.find((w) => String(w.id) === String(watchId))
-    if (!found) {
+    
+    if (payload.ok && payload.watch) {
+      currentWatch = payload.watch
+      renderWatchDetail(currentWatch)
+      await loadAndRenderReviews(currentWatch.id)
+    } else if (Array.isArray(payload.watches)) {
+      const found = payload.watches.find((w) => String(w.id) === String(watchId))
+      if (!found) {
+        showError('Uhr nicht gefunden')
+        return
+      }
+      currentWatch = found
+      renderWatchDetail(currentWatch)
+      await loadAndRenderReviews(currentWatch.id)
+    } else {
       showError('Uhr nicht gefunden')
-      return
     }
-
-    currentWatch = found
-    renderWatchDetail(currentWatch)
   } catch (error) {
     console.error('Error loading watch:', error)
     showError('Fehler beim Laden der Uhr-Details')
@@ -158,6 +167,144 @@ async function toggleFavorite() {
   }
 }
 
+async function loadReviews(watchId) {
+  const apiBase = getApiBase()
+  const response = await fetch(`${apiBase}/api/reviews.php?watch_id=${watchId}`)
+
+  if (!response.ok) {
+    throw new Error('Reviews konnten nicht geladen werden')
+  }
+
+  const payload = await response.json()
+  if (!payload.ok || !Array.isArray(payload.reviews)) {
+    throw new Error('Ungültige API-Antwort für Reviews')
+  }
+
+  return payload.reviews
+}
+
+function formatReviewDate(dateString) {
+  const date = new Date(dateString)
+  return date.toLocaleDateString('de-DE')
+}
+
+function renderReviewsList(reviews) {
+  const reviewsList = document.getElementById('reviewsList')
+  if (!reviewsList) return
+
+  if (reviews.length === 0) {
+    reviewsList.innerHTML = '<p class="no-reviews">Noch keine Bewertungen vorhanden. Sei der Erste!</p>'
+    return
+  }
+
+  reviewsList.innerHTML = reviews.map((review) => `
+    <article class="review-item">
+      <div class="review-head">
+        <h4>${review.username}</h4>
+        <div class="review-meta">
+          <div class="review-stars">
+            ${'★'.repeat(review.rating)}<span class="empty-stars">${'☆'.repeat(5 - review.rating)}</span>
+          </div>
+          <time datetime="${new Date(review.created_at).toISOString().split('T')[0]}">
+            ${formatReviewDate(review.created_at)}
+          </time>
+        </div>
+      </div>
+      <p class="review-comment">${review.comment}</p>
+    </article>
+  `).join('')
+}
+
+async function loadAndRenderReviews(watchId) {
+  try {
+    const reviews = await loadReviews(watchId)
+    renderReviewsList(reviews)
+  } catch (error) {
+    console.error('Error loading reviews:', error)
+    const reviewsList = document.getElementById('reviewsList')
+    if (reviewsList) {
+      reviewsList.innerHTML = '<p class="error">Bewertungen konnten nicht geladen werden</p>'
+    }
+  }
+}
+
+function attachRatingControls() {
+  const rateButtons = Array.from(document.querySelectorAll('#rateInput button'))
+
+  rateButtons.forEach((button) => {
+    button.addEventListener('click', (e) => {
+      e.preventDefault()
+      const rating = parseInt(button.dataset.rating, 10)
+      selectedRating = rating
+
+      rateButtons.forEach((btn, index) => {
+        const btnRating = parseInt(btn.dataset.rating, 10)
+        if (btnRating <= rating) {
+          btn.classList.add('active')
+          const icon = btn.querySelector('i')
+          if (icon) {
+            icon.classList.remove('fa-regular')
+            icon.classList.add('fa-solid')
+          }
+        } else {
+          btn.classList.remove('active')
+          const icon = btn.querySelector('i')
+          if (icon) {
+            icon.classList.add('fa-regular')
+            icon.classList.remove('fa-solid')
+          }
+        }
+      })
+    })
+  })
+}
+
+async function submitReview(watchId, rating, comment) {
+  const apiBase = getApiBase()
+  const response = await fetch(`${apiBase}/api/reviews.php?user_id=${USER_ID}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      watch_id: watchId,
+      rating,
+      comment,
+    }),
+  })
+
+  if (!response.ok) {
+    let serverMessage = ''
+    try {
+      const errorPayload = await response.json()
+      serverMessage = errorPayload?.error || ''
+    } catch (_error) {
+      serverMessage = ''
+    }
+    throw new Error(serverMessage || 'Bewertung konnte nicht gespeichert werden')
+  }
+
+  const payload = await response.json()
+  if (!payload.ok) {
+    throw new Error(payload.error || 'Bewertung konnte nicht gespeichert werden')
+  }
+}
+
+function setReviewStatus(message, isError = false) {
+  const reviewStatus = document.getElementById('reviewStatus')
+  if (!reviewStatus) return
+
+  reviewStatus.textContent = message
+  reviewStatus.style.color = isError ? '#c62828' : '#2e7d32'
+  reviewStatus.style.display = 'block'
+
+  if (!isError) {
+    setTimeout(() => {
+      reviewStatus.style.display = 'none'
+    }, 3000)
+  }
+}
+
 function showError(message) {
   const errorMsg = document.getElementById('errorMessage')
   const spinner = document.getElementById('loadingSpinner')
@@ -172,6 +319,8 @@ function showError(message) {
 document.addEventListener('DOMContentLoaded', () => {
   const favoriteBtn = document.getElementById('favoriteBtn')
   const addToFavBtn = document.getElementById('addToFavBtn')
+  const submitReviewBtn = document.getElementById('submitReviewBtn')
+  const reviewText = document.getElementById('reviewText')
 
   if (favoriteBtn) {
     favoriteBtn.addEventListener('click', toggleFavorite)
@@ -179,6 +328,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (addToFavBtn) {
     addToFavBtn.addEventListener('click', toggleFavorite)
+  }
+
+  attachRatingControls()
+
+  if (submitReviewBtn && reviewText) {
+    submitReviewBtn.addEventListener('click', async () => {
+      const comment = reviewText.value.trim()
+
+      if (!currentWatch || !selectedRating || comment === '') {
+        setReviewStatus('Bitte Bewertung auswählen und Text eingeben', true)
+        return
+      }
+
+      try {
+        await submitReview(currentWatch.id, selectedRating, comment)
+        reviewText.value = ''
+        selectedRating = 0
+        document.querySelectorAll('#rateInput button').forEach((btn) => {
+          btn.classList.remove('active')
+          const icon = btn.querySelector('i')
+          if (icon) {
+            icon.classList.add('fa-regular')
+            icon.classList.remove('fa-solid')
+          }
+        })
+        await loadAndRenderReviews(currentWatch.id)
+        setReviewStatus('Bewertung erfolgreich gespeichert!', false)
+      } catch (error) {
+        console.error('Error submitting review:', error)
+        setReviewStatus(error.message || 'Bewertung konnte nicht gespeichert werden', true)
+      }
+    })
   }
 
   loadWatchDetail()
