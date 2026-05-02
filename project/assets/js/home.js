@@ -8,7 +8,6 @@ if (menuToggle && mainNav) {
   });
 }
 
-// Search button navigation
 const searchBtn = document.querySelector("#searchBtn");
 if (searchBtn) {
   searchBtn.addEventListener("click", () => {

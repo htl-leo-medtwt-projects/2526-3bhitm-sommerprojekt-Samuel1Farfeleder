@@ -1,7 +1,6 @@
 <?php
 declare(strict_types=1);
 
-// Returns one reusable MySQL connection for all API requests.
 function db(): mysqli
 {
     static $connection = null;

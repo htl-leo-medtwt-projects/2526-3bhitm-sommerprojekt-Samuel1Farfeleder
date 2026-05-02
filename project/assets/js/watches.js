@@ -1,20 +1,52 @@
 let watchesData = [];
 
+function getApiBase() {
+  const path = window.location.pathname;
+  const idx = path.indexOf('/project');
+  if (idx !== -1) return path.substring(0, idx + '/project'.length);
+  return '/project';
+}
+
 async function loadWatchesFromDb() {
   try {
-    const response = await fetch("../api/watches.php", {
+    const apiBase = getApiBase();
+    const response = await fetch(`${apiBase}/api/watches.php`, {
       headers: { Accept: "application/json" },
     });
 
     if (!response.ok) {
+      console.error('watches.php returned non-ok', response.status, response.statusText);
+      const text = await response.text().catch(() => '');
+      console.error('watches.php body:', text);
       watchesData = [];
+      showWatchesLoadError('Fehler beim Laden der Uhren. (Serverantwort ' + response.status + ')');
       return;
     }
 
     const payload = await response.json();
-    watchesData = Array.isArray(payload.watches) ? payload.watches : [];
+    if (!payload || !Array.isArray(payload.watches)) {
+      console.error('watches.php returned unexpected payload', payload);
+      watchesData = [];
+      showWatchesLoadError('Unerwartete Antwort vom Server.');
+      return;
+    }
+
+    watchesData = payload.watches;
   } catch (_error) {
+    console.error('Error fetching watches.php', _error);
     watchesData = [];
+    showWatchesLoadError('Netzwerkfehler beim Laden der Uhren.');
+  }
+}
+
+function showWatchesLoadError(message) {
+  const grid = document.getElementById('watchesGrid');
+  const resultCount = document.getElementById('resultCount');
+  if (grid) {
+    grid.innerHTML = `<div class="empty-message">${message}</div>`;
+  }
+  if (resultCount) {
+    resultCount.textContent = '0 watches found';
   }
 }
 

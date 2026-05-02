@@ -46,8 +46,119 @@
     </div>
   </header>
 
+  <main class="page-main">
+    <div id="loadingSpinner" class="loading-spinner" aria-live="polite" aria-label="Lädt Uhrendetails">
+      <i class="fa-solid fa-spinner"></i>
+    </div>
+
+    <div id="errorMessage" class="error-message" style="display: none;"></div>
+
+    <article id="detailContainer" class="watch-detail-container" style="display: none;">
+      <div class="detail-header">
+        <a href="watches.html" class="back-link">
+          <i class="fa-solid fa-arrow-left"></i>
+          Zurück zu Uhren
+        </a>
+      </div>
+
+      <div class="detail-layout">
+        
+        <div class="detail-image-section">
+          <div class="image-wrapper">
+            <img id="watchImage" src="" alt="" class="watch-image-large">
+          </div>
+        </div>
+
+        
+        <div class="detail-info-section">
+          <div class="info-header">
+            <div>
+              <p class="brand-label" id="brandLabel"></p>
+              <h1 id="modelName"></h1>
+              <div class="rating-row">
+                <div class="star-rating" id="starRating"></div>
+                <span class="review-count" id="reviewCount"></span>
+              </div>
+            </div>
+            <button class="favorite-btn" id="favoriteBtn" aria-label="Zu Favoriten hinzufügen">
+              <i class="fa-heart"></i>
+            </button>
+          </div>
+
+          <div class="info-grid">
+            <div class="info-item">
+              <span class="info-label">Produktionsjahr</span>
+              <span class="info-value" id="productionYear"></span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Preis</span>
+              <span class="info-value price" id="price"></span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Werk</span>
+              <span class="info-value" id="movement"></span>
+            </div>
+          </div>
+
+          <div class="description-section">
+            <h2>Beschreibung</h2>
+            <p id="description"></p>
+          </div>
+
+          <div class="action-buttons">
+            <button class="btn btn-primary" id="addToFavBtn">
+              <i class="fa-solid fa-heart"></i>
+              <span id="favBtnText">Zu Favoriten hinzufügen</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </article>
+  </main>
+
   <footer class="site-footer">
     <div class="container footer-grid">
+      <div>
+        <a class="brand" href="startseite.html">
+          <span class="brand-mark">C</span>
+          <span class="brand-name">ChronoVault</span>
+        </a>
+        <p>ChronoVault ist deine Plattform fuer Luxusuhren. Entdecke ausgewaehlte Modelle, bekannte Manufakturen und zeitlose Klassiker an einem Ort.</p>
+      </div>
+
+      <div>
+        <h3>Entdecken</h3>
+        <ul>
+          <li><a href="watches.html">Alle Uhren</a></li>
+          <li><a href="brands.html">Alle Marken</a></li>
+          <li><a href="favorites.html">Meine Favoriten</a></li>
+          <li><a href="profile.html">Mein Profil</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Folge Uns</h3>
+        <div class="socials">
+          <a class="icon-btn" href="https://www.instagram.com/samuelfarfeleder" aria-label="Instagram">
+            <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+          </a>
+          <a class="icon-btn" href="https://www.facebook.com/share/1HdbS6pNuV/?mibextid=wwXIfr" aria-label="Facebook">
+            <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
+          </a>
+          <a class="icon-btn" href="https://x.com/chronovault?s=20" aria-label="X">
+            <i class="fa-brands fa-x-twitter" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">Copyright 2026 ChronoVault. Alle Rechte vorbehalten.</div>
+  </footer>
+
+  <script src="../assets/js/home.js"></script>
+  <script src="../assets/js/watch-detail.js"></script>
+</body>
+</html>
       <div>
         <a class="brand" href="startseite.html">
           <span class="brand-mark">C</span>

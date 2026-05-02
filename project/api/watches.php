@@ -3,12 +3,10 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/db.php';
 
-// This endpoint returns all watches as JSON for the watches page.
 header('Content-Type: application/json; charset=utf-8');
 
-$connection = db();
+ $connection = db();
 
-// Simple list query with brand + average rating.
 $watchListSql = '
     SELECT
         w.id,
