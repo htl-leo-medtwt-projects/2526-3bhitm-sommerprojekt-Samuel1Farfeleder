@@ -46,6 +46,78 @@
     </div>
   </header>
 
+  <main class="page-main">
+    <section class="profile-hero container">
+      <div class="profile-hero-copy">
+        <p class="eyebrow">Demo-Profil ohne Login</p>
+        <h1>Dein ChronoVault Profil</h1>
+        <p>
+          Diese Seite zeigt eine statische Profilansicht mit speicherbaren Kontodaten.
+          Der Demo-User wird direkt in der Datenbank aktualisiert, ohne dass eine Anmeldung notwendig ist.
+        </p>
+      </div>
+
+      <div class="profile-hero-card">
+        <div class="profile-avatar" aria-hidden="true">CV</div>
+        <div>
+          <p class="profile-label">Aktives Profil</p>
+          <h2 id="profileDisplayName">Watch Enthusiast</h2>
+          <p id="profileDisplayEmail">demo@chronovault.com</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="profile-grid container">
+      <article class="profile-card profile-summary">
+        <p class="profile-label">Kontouebersicht</p>
+        <div class="profile-stat-grid">
+          <div class="profile-stat">
+            <strong>01</strong>
+            <span>Demo-User</span>
+          </div>
+          <div class="profile-stat">
+            <strong>24</strong>
+            <span>Favoriten-Merkmale</span>
+          </div>
+          <div class="profile-stat">
+            <strong>2026</strong>
+            <span>Mitglied seit</span>
+          </div>
+        </div>
+
+        <div class="profile-note">
+          Ohne Login bleibt diese Profilseite bewusst statisch, kann aber trotzdem Daten in die bestehende
+          <span>users</span>-Tabelle schreiben.
+        </div>
+      </article>
+
+      <article class="profile-card profile-form-card">
+        <div class="profile-card-head">
+          <div>
+            <p class="profile-label">Profil bearbeiten</p>
+            <h2>Kontodaten speichern</h2>
+          </div>
+          <span class="profile-badge">User #1</span>
+        </div>
+
+        <form id="profileForm" class="profile-form" novalidate>
+          <label>
+            <span>Benutzername</span>
+            <input id="usernameInput" name="username" type="text" maxlength="80" value="Watch Enthusiast" required>
+          </label>
+
+          <label>
+            <span>E-Mail</span>
+            <input id="emailInput" name="email" type="email" maxlength="190" value="demo@chronovault.com" required>
+          </label>
+
+          <button class="profile-submit" type="submit">Aenderungen speichern</button>
+          <p class="profile-status" id="profileStatus" role="status" aria-live="polite"></p>
+        </form>
+      </article>
+    </section>
+  </main>
+
   <footer class="site-footer">
     <div class="container footer-grid">
       <div>
@@ -86,5 +158,6 @@
   </footer>
 
   <script src="../assets/js/home.js"></script>
+  <script src="../assets/js/profile.js"></script>
 </body>
 </html>
