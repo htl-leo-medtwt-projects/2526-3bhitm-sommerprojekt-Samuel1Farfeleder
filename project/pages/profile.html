@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ChronoVault | Profil</title>
+  <title>Profile | ChronoVault</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="../assets/css/home.css">
   <link rel="stylesheet" href="../assets/css/profile.css">
 </head>
 <body>
-  <header class="site-header" id="top">
+  <header class="site-header">
     <div class="nav-shell container">
       <a class="brand" href="startseite.html" aria-label="ChronoVault Startseite">
         <span class="brand-mark">C</span>
@@ -25,96 +25,117 @@
       </button>
 
       <nav class="main-nav" id="mainNav">
-        <a href="startseite.html">Startseite</a>
-        <a href="watches.html">Uhren</a>
-        <a href="brands.html">Marken</a>
-        <a href="favorites.html">Favoriten</a>
-        <a class="active" href="profile.html">Profil</a>
+        <a href="startseite.html">Home</a>
+        <a href="watches.html">Watches</a>
+        <a href="brands.html">Brands</a>
+        <a href="favorites.html">Favorites</a>
+        <a class="active" href="profile.html">Profile</a>
       </nav>
 
       <div class="header-actions" aria-label="Schnellaktionen">
-        <button class="icon-btn" id="searchBtn" aria-label="Suche" type="button">
-          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        <button class="icon-btn" id="searchBtn" aria-label="Suche">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4a7 7 0 1 0 4.47 12.39l4.57 4.57 1.41-1.41-4.57-4.57A7 7 0 0 0 11 4zm0 2a5 5 0 1 1 0 10 5 5 0 0 1 0-10z"></path></svg>
         </button>
         <a class="icon-btn" href="favorites.html" aria-label="Favoriten">
-          <i class="fa-solid fa-heart" aria-hidden="true"></i>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.1 21.35l-1.1-1C5.14 15.24 2 12.39 2 8.85 2 5.99 4.24 4 7 4c1.74 0 3.41.81 4.5 2.09C12.59 4.81 14.26 4 16 4c2.76 0 5 1.99 5 4.85 0 3.54-3.14 6.39-8.99 11.51l-1.11.99z"></path></svg>
         </a>
         <a class="icon-btn icon-gold" href="profile.html" aria-label="Profil">
-          <i class="fa-solid fa-user" aria-hidden="true"></i>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm0 2c-3.33 0-6 2.24-6 5v1h12v-1c0-2.76-2.67-5-6-5z"></path></svg>
         </a>
       </div>
     </div>
   </header>
 
-  <main class="page-main">
-    <section class="profile-hero container">
-      <div class="profile-hero-copy">
-        <p class="eyebrow">Demo-Profil ohne Login</p>
-        <h1>Dein ChronoVault Profil</h1>
-        <p>
-          Diese Seite zeigt eine statische Profilansicht mit speicherbaren Kontodaten.
-          Der Demo-User wird direkt in der Datenbank aktualisiert, ohne dass eine Anmeldung notwendig ist.
-        </p>
-      </div>
-
-      <div class="profile-hero-card">
-        <div class="profile-avatar" aria-hidden="true">CV</div>
+  <main>
+    <section class="profile-banner">
+      <div class="container banner-inner">
+        <div class="big-avatar" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm0 2c-3.33 0-6 2.24-6 5v1h12v-1c0-2.76-2.67-5-6-5z"/></svg>
+        </div>
         <div>
-          <p class="profile-label">Aktives Profil</p>
-          <h2 id="profileDisplayName">Watch Enthusiast</h2>
-          <p id="profileDisplayEmail">demo@chronovault.com</p>
+          <h1 id="bannerUsername">Watch Enthusiast</h1>
+          <p id="memberSince">Member since January 2026</p>
         </div>
       </div>
     </section>
 
-    <section class="profile-grid container">
-      <article class="profile-card profile-summary">
-        <p class="profile-label">Kontouebersicht</p>
-        <div class="profile-stat-grid">
-          <div class="profile-stat">
-            <strong>01</strong>
-            <span>Demo-User</span>
-          </div>
-          <div class="profile-stat">
-            <strong>24</strong>
-            <span>Favoriten-Merkmale</span>
-          </div>
-          <div class="profile-stat">
-            <strong>2026</strong>
-            <span>Mitglied seit</span>
-          </div>
+    <section class="profile-dashboard section">
+      <div class="container">
+        <div class="stats-grid">
+          <article class="stat-card">
+            <h3><span aria-hidden="true">♡</span> Favorites</h3>
+            <strong id="favCount">0</strong>
+            <p>Watches saved</p>
+          </article>
+
+          <article class="stat-card">
+            <h3><span aria-hidden="true">☆</span> Reviews</h3>
+            <strong id="reviewCount">0</strong>
+            <p>Reviews written</p>
+          </article>
+
+          <article class="stat-card">
+            <h3><span aria-hidden="true">⚙</span> Settings</h3>
+            <button class="settings-link" id="manageAccountBtn" type="button" aria-label="Account verwalten">Manage Account</button>
+          </article>
         </div>
 
-        <div class="profile-note">
-          Ohne Login bleibt diese Profilseite bewusst statisch, kann aber trotzdem Daten in die bestehende
-          <span>users</span>-Tabelle schreiben.
-        </div>
-      </article>
+        <h2 class="section-title">Recent Favorites</h2>
+        <div id="favoritesContainer"></div>
 
-      <article class="profile-card profile-form-card">
-        <div class="profile-card-head">
-          <div>
-            <p class="profile-label">Profil bearbeiten</p>
-            <h2>Kontodaten speichern</h2>
+        <h2 class="section-title">Recent Reviews</h2>
+        <div id="reviewsContainer"></div>
+
+        <section class="account-card">
+          <h2>Account Information</h2>
+          <div class="account-list">
+            <div><span>Username</span><strong id="profileUsername">Watch Enthusiast</strong></div>
+            <div><span>Email</span><strong id="profileEmail">demo@chronovault.com</strong></div>
+            <div><span>Member Since</span><strong id="profileMemberSince">January 2026</strong></div>
           </div>
-          <span class="profile-badge">User #1</span>
-        </div>
+        </section>
 
-        <form id="profileForm" class="profile-form" novalidate>
-          <label>
-            <span>Benutzername</span>
-            <input id="usernameInput" name="username" type="text" maxlength="80" value="Watch Enthusiast" required>
-          </label>
+        <section class="account-card" id="authSection">
+          <h2>User System</h2>
+          <p id="authStatus" class="form-status"></p>
+          <div class="auth-grid">
+            <form id="loginForm" class="auth-form" autocomplete="on">
+              <h3>Login</h3>
+              <label for="loginEmail">Email</label>
+              <input id="loginEmail" name="email" type="email" required>
+              <label for="loginPassword">Password</label>
+              <input id="loginPassword" name="password" type="password" required>
+              <button type="submit">Login</button>
+            </form>
 
-          <label>
-            <span>E-Mail</span>
-            <input id="emailInput" name="email" type="email" maxlength="190" value="demo@chronovault.com" required>
-          </label>
+            <form id="registerForm" class="auth-form" autocomplete="on">
+              <h3>Register</h3>
+              <label for="registerUsername">Username</label>
+              <input id="registerUsername" name="username" type="text" minlength="2" required>
+              <label for="registerEmail">Email</label>
+              <input id="registerEmail" name="email" type="email" required>
+              <label for="registerPassword">Password</label>
+              <input id="registerPassword" name="password" type="password" minlength="6" required>
+              <button type="submit">Create Account</button>
+            </form>
+          </div>
+          <button id="logoutBtn" class="logout-btn" type="button">Logout</button>
+        </section>
 
-          <button class="profile-submit" type="submit">Aenderungen speichern</button>
-          <p class="profile-status" id="profileStatus" role="status" aria-live="polite"></p>
-        </form>
-      </article>
+        <section class="account-card" id="settingsSection">
+          <h2>Account Settings</h2>
+          <form id="settingsForm" class="auth-form" autocomplete="on">
+            <label for="settingsUsername">Username</label>
+            <input id="settingsUsername" name="username" type="text" minlength="2" required>
+            <label for="settingsEmail">Email</label>
+            <input id="settingsEmail" name="email" type="email" required>
+            <label for="settingsPassword">New Password (optional)</label>
+            <input id="settingsPassword" name="password" type="password" minlength="6" placeholder="Leave empty to keep current password">
+            <button type="submit">Save Changes</button>
+            <p id="settingsStatus" class="form-status"></p>
+          </form>
+        </section>
+      </div>
     </section>
   </main>
 
@@ -125,36 +146,36 @@
           <span class="brand-mark">C</span>
           <span class="brand-name">ChronoVault</span>
         </a>
-        <p>ChronoVault ist deine Plattform fuer Luxusuhren. Entdecke ausgewaehlte Modelle, bekannte Manufakturen und zeitlose Klassiker an einem Ort.</p>
+        <p>Discover the world's most iconic luxury timepieces. ChronoVault is your premium platform for exploring legendary watch brands and their masterpieces.</p>
       </div>
 
       <div>
-        <h3>Entdecken</h3>
+        <h3>Explore</h3>
         <ul>
-          <li><a href="watches.html">Alle Uhren</a></li>
-          <li><a href="brands.html">Alle Marken</a></li>
-          <li><a href="favorites.html">Meine Favoriten</a></li>
-          <li><a href="profile.html">Mein Profil</a></li>
+          <li><a href="watches.html">All Watches</a></li>
+          <li><a href="brands.html">Brands</a></li>
+          <li><a href="favorites.html">Favorites</a></li>
+          <li><a href="profile.html">Profile</a></li>
         </ul>
       </div>
 
       <div>
-        <h3>Folge Uns</h3>
+        <h3>Follow Us</h3>
         <div class="socials">
-          <a class="icon-btn" href="https://www.instagram.com/samuelfarfeleder" aria-label="Instagram">
-            <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+          <a class="icon-btn" href="https://instagram.com/chronovault" target="_blank" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm11 1.5a1.5 1.5 0 1 1-1.5 1.5A1.5 1.5 0 0 1 18 5.5zM12 7a5 5 0 1 1-5 5 5 5 0 0 1 5-5zm0 2a3 3 0 1 0 3 3 3 3 0 0 0-3-3z"></path></svg>
           </a>
-          <a class="icon-btn" href="https://www.facebook.com/share/1HdbS6pNuV/?mibextid=wwXIfr" aria-label="Facebook">
-            <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
+          <a class="icon-btn" href="https://facebook.com/chronovault" target="_blank" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V5h-3c-2.21 0-4 1.79-4 4v3H7v3h3v6h3v-6h3l1-3h-4V9a1 1 0 0 1 1-1z"></path></svg>
           </a>
-          <a class="icon-btn" href="https://x.com/chronovault?s=20" aria-label="X">
-            <i class="fa-brands fa-x-twitter" aria-hidden="true"></i>
+          <a class="icon-btn" href="https://twitter.com/chronovault" target="_blank" aria-label="X">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-6.76 7.73L23 22h-6.08l-4.76-6.23L6.7 22H3.58l7.23-8.25L1 2h6.23l4.3 5.67z"></path></svg>
           </a>
         </div>
       </div>
     </div>
 
-    <div class="container footer-bottom">Copyright 2026 ChronoVault. Alle Rechte vorbehalten.</div>
+    <div class="container footer-bottom">&copy; 2026 ChronoVault. All rights reserved. Luxury Timepiece Discovery Platform.</div>
   </footer>
 
   <script src="../assets/js/home.js"></script>

@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: application/json; charset=utf-8');
 
-require_once __DIR__ . '/db.php';
+require_once __DIR__ . '/bootstrap.php';
 
 $connection = db();
 $method = strtoupper($_SERVER['REQUEST_METHOD'] ?? 'GET');
@@ -54,7 +54,13 @@ if ($method === 'GET') {
 }
 
 if ($method === 'POST') {
-    $userId = isset($_GET['user_id']) ? (int)$_GET['user_id'] : 1;
+    $userId = authenticated_user_id();
+    
+    if ($userId === null) {
+        http_response_code(401);
+        echo json_encode(['ok' => false, 'error' => 'User must be authenticated to submit a review.']);
+        exit;
+    }
     
     $input = file_get_contents('php://input');
     $body = json_decode($input, true) ?? [];

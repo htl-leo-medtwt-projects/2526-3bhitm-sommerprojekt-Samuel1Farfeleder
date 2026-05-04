@@ -1,13 +1,12 @@
 <?php
 declare(strict_types=1);
 
-require_once __DIR__ . '/db.php';
-
-header('Content-Type: application/json; charset=utf-8');
+require_once __DIR__ . '/bootstrap.php';
 
 $connection = db();
 
 $watchId = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+$userId = authenticated_user_id();
 
 if ($watchId > 0) {
     $singleWatchSql = '
@@ -37,6 +36,14 @@ if ($watchId > 0) {
     }
 
     $row = $result->fetch_assoc();
+    
+    // Check if watch is favorite for authenticated user
+    $isFavorite = false;
+    if ($userId !== null) {
+        $favResult = $connection->query('SELECT id FROM favorites WHERE user_id = ' . (int)$userId . ' AND watch_id = ' . (int)$watchId);
+        $isFavorite = $favResult && $favResult->num_rows > 0;
+    }
+    
     $watch = [
         'id' => (int)$row['id'],
         'brand' => (string)$row['brand'],
@@ -48,7 +55,7 @@ if ($watchId > 0) {
         'pic' => str_replace(["\r", "\n"], '', trim((string)($row['pic'] ?? ''))),
         'rating' => max(1, min(5, (int)$row['rating'])),
         'review_count' => (int)$row['review_count'],
-        'is_favorite' => false,
+        'is_favorite' => $isFavorite,
     ];
 
     http_response_code(200);

@@ -1,5 +1,3 @@
-const USER_ID = 1
-
 let currentWatch = null
 let selectedRating = 0
 
@@ -141,29 +139,52 @@ function updateFavoriteButtonState(isFavorite) {
 async function toggleFavorite() {
   if (!currentWatch) return
 
-  const action = currentWatch.is_favorite ? 'remove' : 'add'
-  const endpoint = action === 'add' ? '../api/add-favorite.php' : '../api/remove-favorite.php'
-
+  const apiBase = getApiBase()
+  
   try {
-    const response = await fetch(endpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        user_id: USER_ID,
-        watch_id: currentWatch.id,
-      }),
-    })
+    if (currentWatch.is_favorite) {
+      // Remove favorite
+      const response = await fetch(`${apiBase}/api/favorites.php?watch_id=${currentWatch.id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+      })
 
-    if (response.ok) {
-      currentWatch.is_favorite = !currentWatch.is_favorite
-      updateFavoriteButtonState(currentWatch.is_favorite)
+      if (!response.ok) {
+        throw new Error('Failed to remove favorite')
+      }
+      
+      currentWatch.is_favorite = false
+      updateFavoriteButtonState(false)
     } else {
-      console.error('Failed to toggle favorite')
+      // Add favorite
+      const response = await fetch(`${apiBase}/api/favorites.php`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+          watch_id: currentWatch.id,
+        }),
+      })
+
+      if (!response.ok) {
+        if (response.status === 401) {
+          alert('Bitte melden Sie sich an um Favoriten zu erstellen')
+          return
+        }
+        throw new Error('Failed to add favorite')
+      }
+      
+      currentWatch.is_favorite = true
+      updateFavoriteButtonState(true)
     }
   } catch (error) {
     console.error('Error toggling favorite:', error)
+    alert('Fehler beim Aktualisieren des Favorits: ' + error.message)
   }
 }
 
@@ -261,11 +282,12 @@ function attachRatingControls() {
 
 async function submitReview(watchId, rating, comment) {
   const apiBase = getApiBase()
-  const response = await fetch(`${apiBase}/api/reviews.php?user_id=${USER_ID}`, {
+  const response = await fetch(`${apiBase}/api/reviews.php`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
+    credentials: 'include',
     body: JSON.stringify({
       watch_id: watchId,
       rating,
@@ -280,6 +302,10 @@ async function submitReview(watchId, rating, comment) {
       serverMessage = errorPayload?.error || ''
     } catch (_error) {
       serverMessage = ''
+    }
+    
+    if (response.status === 401) {
+      throw new Error('Bitte melden Sie sich an um eine Bewertung zu schreiben')
     }
     throw new Error(serverMessage || 'Bewertung konnte nicht gespeichert werden')
   }

@@ -1,123 +1,133 @@
 <?php
 declare(strict_types=1);
 
-require_once __DIR__ . '/db.php';
-
-header('Content-Type: application/json; charset=utf-8');
+require_once __DIR__ . '/bootstrap.php';
 
 $connection = db();
+$userId = require_authenticated_user_id();
 $method = strtoupper($_SERVER['REQUEST_METHOD'] ?? 'GET');
-$userId = isset($_GET['user_id']) ? (int)$_GET['user_id'] : 1;
-
-if ($userId <= 0) {
-    http_response_code(422);
-    echo json_encode(['ok' => false, 'error' => 'user_id must be greater than 0.']);
-    exit;
-}
-
-function fetchProfile(mysqli $connection, int $userId): ?array
-{
-    $stmt = $connection->prepare('SELECT id, username, email, created_at FROM users WHERE id = ?');
-    if (!$stmt) {
-        return null;
-    }
-
-    $stmt->bind_param('i', $userId);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if (!$result || $result->num_rows === 0) {
-        return null;
-    }
-
-    $row = $result->fetch_assoc();
-    if (!$row) {
-        return null;
-    }
-
-    return [
-        'id' => (int)$row['id'],
-        'username' => (string)$row['username'],
-        'email' => (string)$row['email'],
-        'created_at' => (string)$row['created_at'],
-    ];
-}
 
 if ($method === 'GET') {
-    $profile = fetchProfile($connection, $userId);
-
-    if ($profile === null) {
-        http_response_code(404);
-        echo json_encode(['ok' => false, 'error' => 'Profile not found.']);
-        exit;
+    // Load user data
+    $result = $connection->query('SELECT id, username, email, created_at FROM users WHERE id = ' . (int)$userId);
+    if (!$result || $result->num_rows === 0) {
+        json_error('User not found.', 404);
     }
-
-    echo json_encode([
+    
+    $user = $result->fetch_assoc();
+    
+    // Count favorites
+    $favResult = $connection->query('SELECT COUNT(*) as count FROM favorites WHERE user_id = ' . (int)$userId);
+    $favCount = $favResult ? $favResult->fetch_assoc()['count'] : 0;
+    
+    // Count reviews
+    $revResult = $connection->query('SELECT COUNT(*) as count FROM reviews WHERE user_id = ' . (int)$userId);
+    $revCount = $revResult ? $revResult->fetch_assoc()['count'] : 0;
+    
+    // Get recent favorites
+    $recentResult = $connection->query(
+        'SELECT f.id, f.watch_id, w.model as watch_name, w.brand_id, b.name as brand_name 
+         FROM favorites f
+         LEFT JOIN watches w ON f.watch_id = w.id
+         LEFT JOIN brands b ON w.brand_id = b.id
+         WHERE f.user_id = ' . (int)$userId . '
+         ORDER BY f.created_at DESC
+         LIMIT 6'
+    );
+    
+    $recentFavorites = [];
+    if ($recentResult) {
+        while ($row = $recentResult->fetch_assoc()) {
+            $recentFavorites[] = [
+                'id' => (int) $row['id'],
+                'watch_id' => (int) $row['watch_id'],
+                'watch_name' => (string) $row['watch_name'],
+                'brand_id' => (int) $row['brand_id'],
+                'brand_name' => (string) $row['brand_name'],
+            ];
+        }
+    }
+    
+    // Get recent reviews
+    $reviewsResult = $connection->query(
+        'SELECT r.id, r.watch_id, r.rating, r.comment, r.created_at, w.model as watch_name, b.name as brand_name 
+         FROM reviews r
+         LEFT JOIN watches w ON r.watch_id = w.id
+         LEFT JOIN brands b ON w.brand_id = b.id
+         WHERE r.user_id = ' . (int)$userId . '
+         ORDER BY r.created_at DESC
+         LIMIT 6'
+    );
+    
+    $recentReviews = [];
+    if ($reviewsResult) {
+        while ($row = $reviewsResult->fetch_assoc()) {
+            $recentReviews[] = [
+                'id' => (int) $row['id'],
+                'watch_id' => (int) $row['watch_id'],
+                'watch_name' => (string) $row['watch_name'],
+                'brand_name' => (string) $row['brand_name'],
+                'rating' => (int) $row['rating'],
+                'comment' => (string) $row['comment'],
+                'created_at' => (string) $row['created_at'],
+            ];
+        }
+    }
+    
+    json_response([
         'ok' => true,
-        'profile' => $profile,
+        'user' => [
+            'id' => (int) $user['id'],
+            'username' => (string) $user['username'],
+            'email' => (string) $user['email'],
+            'created_at' => (string) $user['created_at'],
+        ],
+        'favorites_count' => (int) $favCount,
+        'reviews_count' => (int) $revCount,
+        'recent_favorites' => $recentFavorites,
+        'recent_reviews' => $recentReviews,
     ]);
-    exit;
 }
 
-if ($method === 'POST') {
-    $body = json_decode(file_get_contents('php://input'), true) ?? [];
-    $username = trim((string)($body['username'] ?? ''));
-    $email = trim((string)($body['email'] ?? ''));
+if ($method === 'PUT') {
+    $body = get_json_input();
+
+    $username = trim((string) ($body['username'] ?? ''));
+    $email = trim((string) ($body['email'] ?? ''));
+    $password = (string) ($body['password'] ?? '');
 
     if ($username === '') {
-        http_response_code(422);
-        echo json_encode(['ok' => false, 'error' => 'username is required.']);
-        exit;
+        json_error('username is required.', 422);
     }
 
-    if (mb_strlen($username) > 80) {
-        http_response_code(422);
-        echo json_encode(['ok' => false, 'error' => 'username is too long.']);
-        exit;
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        json_error('valid email is required.', 422);
     }
 
-    if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        http_response_code(422);
-        echo json_encode(['ok' => false, 'error' => 'A valid email is required.']);
-        exit;
+    $email_escaped = $connection->real_escape_string($email);
+    $result = $connection->query('SELECT id FROM users WHERE email = "' . $email_escaped . '" AND id <> ' . (int)$userId);
+    if ($result && $result->num_rows > 0) {
+        json_error('Email is already in use.', 409);
     }
 
-    if (fetchProfile($connection, $userId) === null) {
-        http_response_code(404);
-        echo json_encode(['ok' => false, 'error' => 'Profile not found.']);
-        exit;
-    }
+    $username_escaped = $connection->real_escape_string($username);
 
-    $stmt = $connection->prepare('UPDATE users SET username = ?, email = ? WHERE id = ?');
-    if (!$stmt) {
-        http_response_code(500);
-        echo json_encode(['ok' => false, 'error' => 'Update failed.']);
-        exit;
-    }
-
-    $stmt->bind_param('ssi', $username, $email, $userId);
-
-    if (!$stmt->execute()) {
-        if ($connection->errno === 1062) {
-            http_response_code(409);
-            echo json_encode(['ok' => false, 'error' => 'Email already exists.']);
-            exit;
+    if ($password !== '') {
+        if (mb_strlen($password) < 6) {
+            json_error('password must be at least 6 characters.', 422);
         }
 
-        http_response_code(500);
-        echo json_encode(['ok' => false, 'error' => 'Database update failed.']);
-        exit;
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+        $hash_escaped = $connection->real_escape_string($hash);
+        $connection->query("UPDATE users SET username = '$username_escaped', email = '$email_escaped', password_hash = '$hash_escaped' WHERE id = " . (int)$userId);
+    } else {
+        $connection->query("UPDATE users SET username = '$username_escaped', email = '$email_escaped' WHERE id = " . (int)$userId);
     }
 
-    $profile = fetchProfile($connection, $userId);
-
-    echo json_encode([
+    json_response([
         'ok' => true,
-        'profile' => $profile,
+        'updated' => true,
     ]);
-    exit;
 }
 
-http_response_code(405);
-echo json_encode(['ok' => false, 'error' => 'Method not allowed.']);
-exit;
+json_error('Method not allowed.', 405);
