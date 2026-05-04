@@ -169,8 +169,8 @@
 
 .watches-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 28px;
 }
 
 .watch-card {
@@ -186,7 +186,7 @@
 }
 
 .watch-media {
-  height: 300px;
+  height: 360px;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -56,14 +56,16 @@ function renderWatchCard(watch, reviewsHtml = '') {
     <article class="watch-card favorite-card">
       <a class="watch-link" href="watch-detail.html?${query}" aria-label="${watch.brand} ${watch.model} ansehen">
         <div class="watch-media">
+          <img class="watch-image" src="${watch.pic || '../assets/img/placeholder.svg'}" alt="${watch.brand} ${watch.model}">
           <button class="heart-btn is-active" aria-label="Favorit entfernen" data-watch-id="${watch.watch_id}" type="button"></button>
         </div>
         <div class="watch-info">
           <small>${watch.brand}</small>
           <h3>${watch.model}</h3>
           <div class="watch-meta">
-            <span>${watch.year}</span>
-            <span class="stars">${'★'.repeat(watch.rating)}</span>
+            <span class="meta-year">${watch.year}</span>
+            <span class="meta-rating">${'★'.repeat(watch.rating)}<span class="empty-stars">${'☆'.repeat(5 - watch.rating)}</span></span>
+            <span class="meta-count">(${watch.review_count ?? 0})</span>
           </div>
         </div>
       </a>
@@ -125,6 +127,15 @@ async function removeFavorite(watchId) {
 }
 
 async function renderFavorites() {
+  const favoritesView = document.getElementById('favoritesView')
+  const favoritesSection = document.getElementById('favoritesSection')
+  const emptyState = document.getElementById('emptyState')
+  const container = document.getElementById('favoritesContainer')
+
+  if (favoritesView) favoritesView.style.display = 'block'
+  if (favoritesSection) favoritesSection.style.display = 'block'
+  if (!container) return
+
   let favorites = []
 
   try {
@@ -133,12 +144,16 @@ async function renderFavorites() {
     console.error(error)
   }
 
-  const container = document.getElementById('favoritesContainer')
-  if (!container) return
-
   if (favorites.length === 0) {
-    container.innerHTML = '<p class="empty-message">Keine Favoriten vorhanden.</p>'
+    container.innerHTML = ''
+    if (emptyState) {
+      emptyState.style.display = 'block'
+    }
     return
+  }
+
+  if (emptyState) {
+    emptyState.style.display = 'none'
   }
 
   const cards = await Promise.all(
@@ -172,8 +187,8 @@ async function renderFavorites() {
         await removeFavorite(watchId)
         btn.closest('.watch-card').remove()
 
-        if (container.children.length === 0) {
-          container.innerHTML = '<p class="empty-message">Keine Favoriten vorhanden.</p>'
+        if (container.children.length === 0 && emptyState) {
+          emptyState.style.display = 'block'
         }
       } catch (error) {
         console.error('Error removing favorite:', error)

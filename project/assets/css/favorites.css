@@ -7,6 +7,61 @@
   padding: 56px 0;
 }
 
+.watches-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 28px;
+}
+
+.favorite-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid rgba(47,43,31,0.12);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.favorite-card .watch-media {
+  height: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  background: #ffffff;
+  position: relative;
+}
+
+.favorite-card .watch-media .watch-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.favorite-card .heart-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.4);
+  border: none;
+}
+
+.favorite-card .watch-info {
+  padding: 12px 14px;
+}
+
+.favorite-card .watch-meta {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: #cfcfcf;
+  font-size: 0.9rem;
+}
+
 .page-hero {
   width: min(780px, 100%);
   text-align: center;

@@ -344,7 +344,7 @@ h3,
 }
 
 .watch-media {
-  height: 390px;
+  height: 360px;
   background:
     linear-gradient(135deg, #d6d6d8 0%, #cfd0d2 78%),
     repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.02) 0 10px, rgba(255, 255, 255, 0.04) 10px 20px);
@@ -612,7 +612,7 @@ h3,
   }
 
   .watch-media {
-    height: 330px;
+    height: 300px;
   }
 }
 
