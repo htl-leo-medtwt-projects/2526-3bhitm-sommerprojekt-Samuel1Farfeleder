@@ -86,14 +86,30 @@
         <h2 class="section-title">Recent Reviews</h2>
         <div id="reviewsContainer"></div>
 
-        <section class="account-card">
-          <h2>Account Information</h2>
-          <div class="account-list">
-            <div><span>Username</span><strong id="profileUsername">Watch Enthusiast</strong></div>
-            <div><span>Email</span><strong id="profileEmail">demo@chronovault.com</strong></div>
-            <div><span>Member Since</span><strong id="profileMemberSince">January 2026</strong></div>
-          </div>
-        </section>
+        <div class="account-grid">
+          <section class="account-card">
+            <h2>Account Information</h2>
+            <div class="account-list">
+              <div><span>Username</span><strong id="profileUsername">Watch Enthusiast</strong></div>
+              <div><span>Email</span><strong id="profileEmail">demo@chronovault.com</strong></div>
+              <div><span>Member Since</span><strong id="profileMemberSince">January 2026</strong></div>
+            </div>
+          </section>
+
+          <section class="account-card" id="settingsSection">
+            <h2>Account Settings</h2>
+            <form id="settingsForm" class="auth-form" autocomplete="on">
+              <label for="settingsUsername">Username</label>
+              <input id="settingsUsername" name="username" type="text" minlength="2" required>
+              <label for="settingsEmail">Email</label>
+              <input id="settingsEmail" name="email" type="email" required>
+              <label for="settingsPassword">New Password (optional)</label>
+              <input id="settingsPassword" name="password" type="password" minlength="6" placeholder="Leave empty to keep current password">
+              <button type="submit">Save Changes</button>
+              <p id="settingsStatus" class="form-status"></p>
+            </form>
+          </section>
+        </div>
 
         <section class="account-card" id="authSection">
           <h2>User System</h2>
@@ -120,20 +136,6 @@
             </form>
           </div>
           <button id="logoutBtn" class="logout-btn" type="button">Logout</button>
-        </section>
-
-        <section class="account-card" id="settingsSection">
-          <h2>Account Settings</h2>
-          <form id="settingsForm" class="auth-form" autocomplete="on">
-            <label for="settingsUsername">Username</label>
-            <input id="settingsUsername" name="username" type="text" minlength="2" required>
-            <label for="settingsEmail">Email</label>
-            <input id="settingsEmail" name="email" type="email" required>
-            <label for="settingsPassword">New Password (optional)</label>
-            <input id="settingsPassword" name="password" type="password" minlength="6" placeholder="Leave empty to keep current password">
-            <button type="submit">Save Changes</button>
-            <p id="settingsStatus" class="form-status"></p>
-          </form>
         </section>
       </div>
     </section>

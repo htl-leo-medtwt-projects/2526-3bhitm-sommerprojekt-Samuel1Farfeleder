@@ -189,11 +189,13 @@
 }
 
 .recent-card {
-  max-width: 360px;
   background: linear-gradient(145deg, #16181d 0%, #131419 70%);
   border: 1px solid var(--line);
   border-radius: 16px;
   padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .recent-card small {
@@ -214,6 +216,28 @@
   font-size: 1.7rem;
 }
 
+/* Grid layout for recent items */
+#favoritesContainer,
+#reviewsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.review-text {
+  color: #d6d6d8;
+  font-size: 1.6rem;
+  line-height: 1.4;
+}
+
 .account-card {
   margin-top: 20px;
   border: 1px solid var(--line);
@@ -221,6 +245,10 @@
   background: #15171c;
   padding: 22px 30px;
   max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 260px;
 }
 
 .account-card h2 {
@@ -243,6 +271,21 @@
   display: block;
   margin-top: 4px;
   font-size: 2.2rem;
+}
+
+/* Account grid to show info and settings side-by-side */
+.account-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+/* Ensure stat, recent and account cards have consistent sizing */
+.stat-card,
+.recent-card,
+.account-card {
+  min-height: 260px;
 }
 
 .auth-grid {

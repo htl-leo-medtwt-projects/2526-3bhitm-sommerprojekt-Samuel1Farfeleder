@@ -74,33 +74,7 @@ function renderWatchCard(watch, reviewsHtml = '') {
   `
 }
 
-async function fetchReviews(watchId) {
-  try {
-    const url = new URL(`${getApiBase()}/api/reviews.php`, window.location.href)
-    url.searchParams.set('watch_id', String(watchId))
-
-    const response = await fetch(url, {
-      credentials: 'include'
-    })
-    if (!response.ok) {
-      return []
-    }
-
-    const payload = await response.json()
-    return payload.ok && Array.isArray(payload.reviews) ? payload.reviews : []
-  } catch (error) {
-    console.error('Fetch reviews error:', error)
-    return []
-  }
-}
-
-function pickRandomReviews(reviews, count = 3) {
-  if (reviews.length <= count) return reviews
-
-  const shuffled = [...reviews].sort(() => Math.random() - 0.5)
-  const desiredCount = Math.min(reviews.length, Math.random() < 0.5 ? 2 : 3)
-  return shuffled.slice(0, desiredCount)
-}
+// Reviews preview removed from favorites view per user request
 
 async function removeFavorite(watchId) {
   try {
@@ -156,23 +130,7 @@ async function renderFavorites() {
     emptyState.style.display = 'none'
   }
 
-  const cards = await Promise.all(
-    favorites.map(async (watch) => {
-      const reviews = await fetchReviews(watch.watch_id)
-      const pickedReviews = pickRandomReviews(reviews)
-      const reviewsHtml = pickedReviews.length > 0 ? `
-        <div class="review-preview">
-          ${pickedReviews.map((r) => `
-            <blockquote class="mini-review">
-              <p>"${r.comment.substring(0, 80)}${r.comment.length > 80 ? '...' : ''}"</p>
-              <footer>— ${r.username}</footer>
-            </blockquote>
-          `).join('')}
-        </div>
-      ` : ''
-      return renderWatchCard(watch, reviewsHtml)
-    })
-  )
+  const cards = favorites.map((watch) => renderWatchCard(watch))
 
   container.innerHTML = cards.join('')
 
