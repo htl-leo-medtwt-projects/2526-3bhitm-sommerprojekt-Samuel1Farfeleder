@@ -1,6 +1,7 @@
 function getApiBase() {
   const path = window.location.pathname
   const idx = path.indexOf('/project')
+  // Die Favoriten-Seite soll unabhängig vom genauen lokalen Pfad funktionieren.
   if (idx !== -1) return path.substring(0, idx + '/project'.length)
   return '/project'
 }
@@ -15,6 +16,7 @@ async function checkAuthStatus() {
     }
 
     const payload = await response.json()
+    // Nur angemeldete Benutzer bekommen ihre Favoritenliste angezeigt.
     return payload.authenticated ? payload.user : null
   } catch (error) {
     console.error('Auth check failed:', error)
@@ -57,6 +59,7 @@ function renderWatchCard(watch, reviewsHtml = '') {
       <a class="watch-link" href="watch-detail.html?${query}" aria-label="${watch.brand} ${watch.model} ansehen">
         <div class="watch-media">
           <img class="watch-image" src="${watch.pic || '../assets/img/placeholder.svg'}" alt="${watch.brand} ${watch.model}">
+          <!-- Der Herz-Button liegt innerhalb des anklickbaren Cards, darum wird der Klick später bewusst abgefangen. -->
           <button class="heart-btn is-active" aria-label="Favorit entfernen" data-watch-id="${watch.watch_id}" type="button"></button>
         </div>
         <div class="watch-info">
@@ -81,6 +84,7 @@ async function removeFavorite(watchId) {
     const url = new URL(`${getApiBase()}/api/favorites.php`, window.location.href)
     url.searchParams.set('watch_id', String(watchId))
 
+    // Der Favorit wird per DELETE entfernt, damit der Zustand direkt serverseitig stimmt.
     const response = await fetch(url, {
       method: 'DELETE',
       credentials: 'include'
@@ -121,6 +125,7 @@ async function renderFavorites() {
   if (favorites.length === 0) {
     container.innerHTML = ''
     if (emptyState) {
+      // Leerer Zustand: Statt leerer Fläche wird ein Hinweis mit Call-to-Action gezeigt.
       emptyState.style.display = 'block'
     }
     return
@@ -137,12 +142,14 @@ async function renderFavorites() {
   // Attach heart button listeners
   container.querySelectorAll('.heart-btn').forEach((btn) => {
     btn.addEventListener('click', async (e) => {
+      // Der Klick soll nur den Favoriten entfernen und nicht den Link zur Detailseite öffnen.
       e.preventDefault()
       e.stopPropagation()
 
       const watchId = parseInt(btn.dataset.watchId, 10)
       try {
         await removeFavorite(watchId)
+        // Nach dem Löschen wird die Karte direkt aus dem Grid entfernt, damit die UI sofort korrekt ist.
         btn.closest('.watch-card').remove()
 
         if (container.children.length === 0 && emptyState) {

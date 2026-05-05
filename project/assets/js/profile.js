@@ -1,6 +1,7 @@
 function getApiBase() {
   const path = window.location.pathname
   const idx = path.indexOf('/project')
+  // Die App kann aus einem Unterordner laufen, daher wird die API-Basis dynamisch berechnet.
   if (idx !== -1) return path.substring(0, idx + '/project'.length)
   return '/project'
 }
@@ -43,14 +44,14 @@ function updateAuthUI(authenticated, user = null) {
   const logoutBtn = document.getElementById('logoutBtn')
 
   if (!authenticated) {
-    // Zeige Login/Register Formulare
+    // Nicht angemeldet: Login- und Registrierungsbereich sichtbar machen, Einstellungen ausblenden.
     if (authSection) authSection.style.display = 'block'
     if (settingsSection) settingsSection.style.display = 'none'
     if (loginForm) loginForm.style.display = 'block'
     if (registerForm) registerForm.style.display = 'block'
     if (logoutBtn) logoutBtn.style.display = 'none'
   } else {
-    // Zeige Settings
+    // Angemeldet: Profil-Einstellungen anzeigen und Felder mit den aktuellen Daten füllen.
     if (authSection) authSection.style.display = 'none'
     if (settingsSection) settingsSection.style.display = 'block'
     if (logoutBtn) logoutBtn.style.display = 'block'
@@ -81,6 +82,7 @@ async function checkAuth() {
     const data = await response.json()
     
     if (data.authenticated && data.user) {
+      // Erst wenn die Session gültig ist, werden die Profildaten nachgeladen.
       updateAuthUI(true, data.user)
       await loadProfile()
     } else {
@@ -111,7 +113,7 @@ async function loadProfile() {
     const recentFavorites = data.recent_favorites
     const recentReviews = data.recent_reviews
 
-    // Aktualisiere UI mit Profildaten
+    // Die Banner- und Kontodaten werden einzeln gesetzt, weil sie an mehreren Stellen auf der Seite vorkommen.
     const bannerUsername = document.getElementById('bannerUsername')
     if (bannerUsername) bannerUsername.textContent = user.username
 
@@ -133,7 +135,7 @@ async function loadProfile() {
     const reviewCountEl = document.getElementById('reviewCount')
     if (reviewCountEl) reviewCountEl.textContent = revCount
 
-    // Zeige Recent Favorites
+    // Die letzten Favoriten werden als kompakte Kacheln gerendert, damit die Seite nicht zu lang wird.
     const favContainer = document.getElementById('favoritesContainer')
     if (favContainer) {
       if (recentFavorites.length === 0) {
@@ -149,7 +151,7 @@ async function loadProfile() {
       }
     }
 
-    // Zeige Recent Reviews
+    // Reviews bekommen eine Vorschau, damit man schnell erkennt, was zuletzt bewertet wurde.
     const revContainer = document.getElementById('reviewsContainer')
     if (revContainer) {
       if (recentReviews.length === 0) {
@@ -209,10 +211,10 @@ async function handleLogin(e) {
     setAuthStatus('Login successful!')
     updateAuthUI(true, data.user)
     
-    // Reset form
+    // Das Formular wird geleert, damit keine alten Zugangsdaten sichtbar bleiben.
     document.getElementById('loginForm').reset()
     
-    // Reload profile with delay to ensure session is set
+    // Kurze Verzögerung, damit die Session serverseitig sicher gesetzt ist, bevor das Profil neu geladen wird.
     setTimeout(() => {
       loadProfile()
     }, 500)
@@ -257,7 +259,7 @@ async function handleRegister(e) {
     setAuthStatus('Registration successful!')
     updateAuthUI(true, data.user)
     
-    // Reset form
+    // Das Registrierungsformular wird direkt zurückgesetzt, damit der neue Account sauber bestätigt wird.
     document.getElementById('registerForm').reset()
     
     await loadProfile()
@@ -280,6 +282,7 @@ async function handleLogout(e) {
     const data = await response.json()
 
     if (data.ok) {
+      // Nach dem Logout wird die UI wieder in den unauthentifizierten Zustand versetzt.
       updateAuthUI(false)
       document.getElementById('loginForm').reset()
       document.getElementById('registerForm').reset()
@@ -322,7 +325,7 @@ async function handleSettings(e) {
 
     setSettingsStatus('Changes saved successfully!')
     
-    // Reload profile
+    // Nach dem Speichern werden die angezeigten Daten direkt aus der API aktualisiert.
     await loadProfile()
   } catch (error) {
     console.error('Settings save error:', error)
@@ -331,7 +334,7 @@ async function handleSettings(e) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Setup event listeners
+  // Event-Listener werden gebunden, sobald die Seite fertig geladen ist.
   const loginForm = document.getElementById('loginForm')
   const registerForm = document.getElementById('registerForm')
   const settingsForm = document.getElementById('settingsForm')
@@ -347,11 +350,12 @@ document.addEventListener('DOMContentLoaded', () => {
     manageAccountBtn.addEventListener('click', () => {
       const settingsSection = document.getElementById('settingsSection')
       if (settingsSection) {
+        // Der Button springt direkt zu den Account-Einstellungen, damit man nicht suchen muss.
         settingsSection.scrollIntoView({ behavior: 'smooth' })
       }
     })
   }
 
-  // Check auth status on page load
+  // Beim Laden wird zuerst geprüft, ob bereits eine gültige Session existiert.
   checkAuth()
 })

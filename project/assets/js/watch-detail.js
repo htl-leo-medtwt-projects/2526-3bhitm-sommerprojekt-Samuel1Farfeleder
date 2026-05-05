@@ -4,6 +4,7 @@ let selectedRating = 0
 function getApiBase() {
   const path = window.location.pathname
   const idx = path.indexOf('/project')
+  // Die App kann in unterschiedlichen lokalen Pfaden laufen, deshalb wird die API-Basis aus der aktuellen URL abgeleitet.
   if (idx !== -1) return path.substring(0, idx + '/project'.length)
   return '/project'
 }
@@ -30,10 +31,12 @@ async function loadWatchDetail() {
     const payload = await response.json()
     
     if (payload.ok && payload.watch) {
+      // Standardfall: Die API liefert direkt ein einzelnes Watch-Objekt zurück.
       currentWatch = payload.watch
       renderWatchDetail(currentWatch)
       await loadAndRenderReviews(currentWatch.id)
     } else if (Array.isArray(payload.watches)) {
+      // Fallback: Falls die API eine Liste zurückgibt, wird die gesuchte Uhr daraus herausgefiltert.
       const found = payload.watches.find((w) => String(w.id) === String(watchId))
       if (!found) {
         showError('Uhr nicht gefunden')
@@ -73,6 +76,7 @@ function renderWatchDetail(watch) {
 
   const starRating = document.getElementById('starRating')
   if (starRating) {
+    // Die Sterne werden als HTML gerendert, weil die gefüllten und leeren Icons dynamisch wechseln.
     starRating.innerHTML = renderStars(watch.rating, false)
   }
 
@@ -111,6 +115,7 @@ function renderStars(rating, interactive = false) {
 }
 
 function formatPrice(priceUsd) {
+  // Die Preisformatierung nutzt das deutsche Zahlenformat, aber mit USD als Währung.
   return new Intl.NumberFormat('de-DE', {
     style: 'currency',
     currency: 'USD',
@@ -143,7 +148,7 @@ async function toggleFavorite() {
   
   try {
     if (currentWatch.is_favorite) {
-      // Remove favorite
+      // Bei aktivem Favorit-Status wird der Eintrag per DELETE entfernt.
       const response = await fetch(`${apiBase}/api/favorites.php?watch_id=${currentWatch.id}`, {
         method: 'DELETE',
         headers: {
@@ -159,7 +164,7 @@ async function toggleFavorite() {
       currentWatch.is_favorite = false
       updateFavoriteButtonState(false)
     } else {
-      // Add favorite
+      // Andernfalls wird die Uhr per POST in die Favoriten geschrieben.
       const response = await fetch(`${apiBase}/api/favorites.php`, {
         method: 'POST',
         headers: {
@@ -205,6 +210,7 @@ async function loadReviews(watchId) {
 }
 
 function formatReviewDate(dateString) {
+  // Reviews sollen in einer kurzen, lesbaren Datumsform angezeigt werden.
   const date = new Date(dateString)
   return date.toLocaleDateString('de-DE')
 }
@@ -258,6 +264,7 @@ function attachRatingControls() {
       const rating = parseInt(button.dataset.rating, 10)
       selectedRating = rating
 
+      // Beim Klicken werden alle Sterne bis zur gewählten Bewertung aktiv markiert.
       rateButtons.forEach((btn, index) => {
         const btnRating = parseInt(btn.dataset.rating, 10)
         if (btnRating <= rating) {
@@ -362,6 +369,7 @@ document.addEventListener('DOMContentLoaded', () => {
     submitReviewBtn.addEventListener('click', async () => {
       const comment = reviewText.value.trim()
 
+      // Eine Bewertung ist nur sinnvoll, wenn Uhr, Sternzahl und Text vorhanden sind.
       if (!currentWatch || !selectedRating || comment === '') {
         setReviewStatus('Bitte Bewertung auswählen und Text eingeben', true)
         return
@@ -371,6 +379,7 @@ document.addEventListener('DOMContentLoaded', () => {
         await submitReview(currentWatch.id, selectedRating, comment)
         reviewText.value = ''
         selectedRating = 0
+        // Nach dem Absenden werden die Sterne zurückgesetzt, damit klar ist, dass die Eingabe abgeschlossen ist.
         document.querySelectorAll('#rateInput button').forEach((btn) => {
           btn.classList.remove('active')
           const icon = btn.querySelector('i')
