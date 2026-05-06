@@ -23,6 +23,7 @@ body {
 }
 
 html {
+  scroll-behavior: smooth;
   font-size: 13px;
 }
 
@@ -263,6 +264,11 @@ h3,
 
 .section {
   padding: 78px 0;
+}
+
+#featured,
+#brands {
+  scroll-margin-top: 100px;
 }
 
 .section-heading {

@@ -15,6 +15,20 @@ if (searchBtn) {
   });
 }
 
+document.querySelectorAll(".hero-actions a[href^='#']").forEach((button) => {
+  button.addEventListener("click", (event) => {
+    const targetSelector = button.getAttribute("href");
+    const targetSection = targetSelector ? document.querySelector(targetSelector) : null;
+
+    if (!targetSection) {
+      return;
+    }
+
+    event.preventDefault();
+    targetSection.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+});
+
 document.querySelectorAll(".heart-btn").forEach((button) => {
   button.addEventListener("click", () => {
     button.classList.toggle("is-active");
