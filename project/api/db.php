@@ -9,24 +9,26 @@ function db(): mysqli
         return $connection;
     }
 
-    $host = 'db_server';
+    $hostsToTry = ['db_server', '127.0.0.1', 'localhost'];
     $port = 3306;
     $user = 'root';
     $password = 'rootpassword';
     $database = 'chronovault';
 
-    $connection = new mysqli(
-        $host,
-        $user,
-        $password,
-        $database,
-        $port
-    );
+    $lastError = null;
+    foreach ($hostsToTry as $host) {
+        $connection = new mysqli($host, $user, $password, $database, $port);
+        if (!$connection->connect_error) {
+            break;
+        }
+        $lastError = $connection->connect_error;
+        $connection = null;
+    }
 
-    if ($connection->connect_error) {
+    if (!($connection instanceof mysqli) || $connection->connect_error) {
         http_response_code(500);
         header('Content-Type: application/json; charset=utf-8');
-        echo json_encode(['error' => 'DB connection failed']);
+        echo json_encode(['error' => 'DB connection failed', 'detail' => $lastError]);
         exit;
     }
 

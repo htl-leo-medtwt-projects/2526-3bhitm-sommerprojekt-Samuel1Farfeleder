@@ -36,25 +36,29 @@ function setSettingsStatus(message, isError = false) {
   }
 }
 
+function getInitials(name) {
+  return name ? name.charAt(0).toUpperCase() : '?'
+}
+
 function updateAuthUI(authenticated, user = null) {
-  const authSection = document.getElementById('authSection')
-  const settingsSection = document.getElementById('settingsSection')
+  const authSectionWrapper = document.getElementById('authSectionWrapper')
+  const accountSectionWrapper = document.getElementById('accountSectionWrapper')
   const loginForm = document.getElementById('loginForm')
   const registerForm = document.getElementById('registerForm')
   const logoutBtn = document.getElementById('logoutBtn')
 
   if (!authenticated) {
     // Nicht angemeldet: Login- und Registrierungsbereich sichtbar machen, Einstellungen ausblenden.
-    if (authSection) authSection.style.display = 'block'
-    if (settingsSection) settingsSection.style.display = 'none'
+    if (authSectionWrapper) authSectionWrapper.style.display = 'block'
+    if (accountSectionWrapper) accountSectionWrapper.style.display = 'none'
     if (loginForm) loginForm.style.display = 'block'
     if (registerForm) registerForm.style.display = 'block'
     if (logoutBtn) logoutBtn.style.display = 'none'
   } else {
     // Angemeldet: Profil-Einstellungen anzeigen und Felder mit den aktuellen Daten füllen.
-    if (authSection) authSection.style.display = 'none'
-    if (settingsSection) settingsSection.style.display = 'block'
-    if (logoutBtn) logoutBtn.style.display = 'block'
+    if (authSectionWrapper) authSectionWrapper.style.display = 'none'
+    if (accountSectionWrapper) accountSectionWrapper.style.display = 'block'
+    if (logoutBtn) logoutBtn.style.display = 'flex'
     
     if (user) {
       const settingsUsername = document.getElementById('settingsUsername')
@@ -113,13 +117,26 @@ async function loadProfile() {
     const recentFavorites = data.recent_favorites
     const recentReviews = data.recent_reviews
 
-    // Die Banner- und Kontodaten werden einzeln gesetzt, weil sie an mehreren Stellen auf der Seite vorkommen.
+    // Banner Avatar initial
+    const bannerAvatar = document.getElementById('bannerAvatar')
+    if (bannerAvatar) bannerAvatar.textContent = getInitials(user.username)
+
+    // Banner Username
     const bannerUsername = document.getElementById('bannerUsername')
     if (bannerUsername) bannerUsername.textContent = user.username
 
+    // Member since
     const memberSince = document.getElementById('memberSince')
-    if (memberSince) memberSince.textContent = `Member since ${formatDate(user.created_at)}`
+    if (memberSince) memberSince.textContent = `Seit ${formatDate(user.created_at)}`
 
+    // Mini stats in banner
+    const miniFavCount = document.getElementById('miniFavCount')
+    if (miniFavCount) miniFavCount.textContent = favCount
+
+    const miniRevCount = document.getElementById('miniRevCount')
+    if (miniRevCount) miniRevCount.textContent = revCount
+
+    // Profil Info Account
     const profileUsername = document.getElementById('profileUsername')
     if (profileUsername) profileUsername.textContent = user.username
 
@@ -129,6 +146,7 @@ async function loadProfile() {
     const profileMemberSince = document.getElementById('profileMemberSince')
     if (profileMemberSince) profileMemberSince.textContent = formatDate(user.created_at)
 
+    // Stat Cards
     const favCountEl = document.getElementById('favCount')
     if (favCountEl) favCountEl.textContent = favCount
 
@@ -139,13 +157,13 @@ async function loadProfile() {
     const favContainer = document.getElementById('favoritesContainer')
     if (favContainer) {
       if (recentFavorites.length === 0) {
-        favContainer.innerHTML = '<p class="empty-message">No favorites yet.</p>'
+        favContainer.innerHTML = '<p class="empty-message">Noch keine Favoriten.</p>'
       } else {
         favContainer.innerHTML = recentFavorites.map(fav => `
           <div class="recent-card">
             <small>${fav.brand_name}</small>
             <h3>${fav.watch_name}</h3>
-            <p><a href="watch-detail.html?id=${fav.watch_id}" class="view-link">View Watch →</a></p>
+            <p><a href="watch-detail.html?id=${fav.watch_id}" class="view-link">Ansehen <i class="fa-solid fa-arrow-right"></i></a></p>
           </div>
         `).join('')
       }
@@ -155,7 +173,7 @@ async function loadProfile() {
     const revContainer = document.getElementById('reviewsContainer')
     if (revContainer) {
       if (recentReviews.length === 0) {
-        revContainer.innerHTML = '<p class="empty-message">No reviews yet.</p>'
+        revContainer.innerHTML = '<p class="empty-message">Noch keine Bewertungen.</p>'
       } else {
         revContainer.innerHTML = recentReviews.map(rev => `
           <div class="recent-card">
@@ -164,7 +182,7 @@ async function loadProfile() {
               <div class="stars">${'★'.repeat(rev.rating)}<span class="empty-stars">${'☆'.repeat(5 - rev.rating)}</span></div>
             </div>
             <p class="review-text">"${rev.comment.substring(0, 100)}${rev.comment.length > 100 ? '...' : ''}"</p>
-            <p><a href="watch-detail.html?id=${rev.watch_id}" class="view-link">View Watch →</a></p>
+            <p><a href="watch-detail.html?id=${rev.watch_id}" class="view-link">Ansehen <i class="fa-solid fa-arrow-right"></i></a></p>
           </div>
         `).join('')
       }
@@ -172,9 +190,9 @@ async function loadProfile() {
   } catch (error) {
     console.error('Profile load error:', error)
     const favCountEl = document.getElementById('favCount')
-    if (favCountEl) favCountEl.textContent = 'Error'
+    if (favCountEl) favCountEl.textContent = 'Fehler'
     const reviewCountEl = document.getElementById('reviewCount')
-    if (reviewCountEl) reviewCountEl.textContent = 'Error'
+    if (reviewCountEl) reviewCountEl.textContent = 'Fehler'
   }
 }
 
@@ -185,7 +203,7 @@ async function handleLogin(e) {
   const password = document.getElementById('loginPassword').value
 
   if (!email || !password) {
-    setAuthStatus('Email and password are required.', true)
+    setAuthStatus('E-Mail und Passwort sind erforderlich.', true)
     return
   }
 
@@ -204,11 +222,11 @@ async function handleLogin(e) {
     const data = await response.json()
 
     if (!data.ok) {
-      setAuthStatus(data.error || 'Login failed.', true)
+      setAuthStatus(data.error || 'Login fehlgeschlagen.', true)
       return
     }
 
-    setAuthStatus('Login successful!')
+    setAuthStatus('Erfolgreich angemeldet!')
     updateAuthUI(true, data.user)
     
     // Das Formular wird geleert, damit keine alten Zugangsdaten sichtbar bleiben.
@@ -220,7 +238,7 @@ async function handleLogin(e) {
     }, 500)
   } catch (error) {
     console.error('Login error:', error)
-    setAuthStatus('Login failed.', true)
+    setAuthStatus('Login fehlgeschlagen.', true)
   }
 }
 
@@ -232,7 +250,7 @@ async function handleRegister(e) {
   const password = document.getElementById('registerPassword').value
 
   if (!username || !email || !password) {
-    setAuthStatus('All fields are required.', true)
+    setAuthStatus('Alle Felder sind erforderlich.', true)
     return
   }
 
@@ -252,11 +270,11 @@ async function handleRegister(e) {
     const data = await response.json()
 
     if (!data.ok) {
-      setAuthStatus(data.error || 'Registration failed.', true)
+      setAuthStatus(data.error || 'Registrierung fehlgeschlagen.', true)
       return
     }
 
-    setAuthStatus('Registration successful!')
+    setAuthStatus('Registrierung erfolgreich!')
     updateAuthUI(true, data.user)
     
     // Das Registrierungsformular wird direkt zurückgesetzt, damit der neue Account sauber bestätigt wird.
@@ -265,7 +283,7 @@ async function handleRegister(e) {
     await loadProfile()
   } catch (error) {
     console.error('Register error:', error)
-    setAuthStatus('Registration failed.', true)
+    setAuthStatus('Registrierung fehlgeschlagen.', true)
   }
 }
 
@@ -300,7 +318,7 @@ async function handleSettings(e) {
   const password = document.getElementById('settingsPassword').value
 
   if (!username || !email) {
-    setSettingsStatus('Username and email are required.', true)
+    setSettingsStatus('Benutzername und E-Mail sind erforderlich.', true)
     return
   }
 
@@ -319,17 +337,17 @@ async function handleSettings(e) {
     const data = await response.json()
 
     if (!data.ok) {
-      setSettingsStatus(data.error || 'Save failed.', true)
+      setSettingsStatus(data.error || 'Speichern fehlgeschlagen.', true)
       return
     }
 
-    setSettingsStatus('Changes saved successfully!')
+    setSettingsStatus('Änderungen erfolgreich gespeichert!')
     
     // Nach dem Speichern werden die angezeigten Daten direkt aus der API aktualisiert.
     await loadProfile()
   } catch (error) {
     console.error('Settings save error:', error)
-    setSettingsStatus('Save failed.', true)
+    setSettingsStatus('Speichern fehlgeschlagen.', true)
   }
 }
 
@@ -340,20 +358,26 @@ document.addEventListener('DOMContentLoaded', () => {
   const settingsForm = document.getElementById('settingsForm')
   const logoutBtn = document.getElementById('logoutBtn')
   const manageAccountBtn = document.getElementById('manageAccountBtn')
+  const manageAccountBtn2 = document.getElementById('manageAccountBtn2')
 
   if (loginForm) loginForm.addEventListener('submit', handleLogin)
   if (registerForm) registerForm.addEventListener('submit', handleRegister)
   if (settingsForm) settingsForm.addEventListener('submit', handleSettings)
   if (logoutBtn) logoutBtn.addEventListener('click', handleLogout)
   
+  function scrollToSettings() {
+    const accountSectionWrapper = document.getElementById('accountSectionWrapper')
+    if (accountSectionWrapper) {
+      accountSectionWrapper.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
   if (manageAccountBtn) {
-    manageAccountBtn.addEventListener('click', () => {
-      const settingsSection = document.getElementById('settingsSection')
-      if (settingsSection) {
-        // Der Button springt direkt zu den Account-Einstellungen, damit man nicht suchen muss.
-        settingsSection.scrollIntoView({ behavior: 'smooth' })
-      }
-    })
+    manageAccountBtn.addEventListener('click', scrollToSettings)
+  }
+
+  if (manageAccountBtn2) {
+    manageAccountBtn2.addEventListener('click', scrollToSettings)
   }
 
   // Beim Laden wird zuerst geprüft, ob bereits eine gültige Session existiert.

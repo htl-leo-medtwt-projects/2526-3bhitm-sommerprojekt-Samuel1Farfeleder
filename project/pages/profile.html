@@ -3,10 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Profile | ChronoVault</title>
+  <title>Profil | ChronoVault</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
   <link rel="stylesheet" href="../assets/css/home.css">
   <link rel="stylesheet" href="../assets/css/profile.css">
 </head>
@@ -25,118 +26,265 @@
       </button>
 
       <nav class="main-nav" id="mainNav">
-        <a href="startseite.html">Home</a>
-        <a href="watches.html">Watches</a>
-        <a href="brands.html">Brands</a>
-        <a href="favorites.html">Favorites</a>
-        <a class="active" href="profile.html">Profile</a>
+        <a href="startseite.html">Startseite</a>
+        <a href="watches.html">Uhren</a>
+        <a href="brands.html">Marken</a>
+        <a href="find-watch.html">Uhrfinder</a>
+        <a href="favorites.html">Favoriten</a>
+        <a class="active" href="profile.html">Profil</a>
       </nav>
 
       <div class="header-actions" aria-label="Schnellaktionen">
         <button class="icon-btn" id="searchBtn" aria-label="Suche">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4a7 7 0 1 0 4.47 12.39l4.57 4.57 1.41-1.41-4.57-4.57A7 7 0 0 0 11 4zm0 2a5 5 0 1 1 0 10 5 5 0 0 1 0-10z"></path></svg>
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
         </button>
         <a class="icon-btn" href="favorites.html" aria-label="Favoriten">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.1 21.35l-1.1-1C5.14 15.24 2 12.39 2 8.85 2 5.99 4.24 4 7 4c1.74 0 3.41.81 4.5 2.09C12.59 4.81 14.26 4 16 4c2.76 0 5 1.99 5 4.85 0 3.54-3.14 6.39-8.99 11.51l-1.11.99z"></path></svg>
+          <i class="fa-solid fa-heart" aria-hidden="true"></i>
         </a>
         <a class="icon-btn icon-gold" href="profile.html" aria-label="Profil">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm0 2c-3.33 0-6 2.24-6 5v1h12v-1c0-2.76-2.67-5-6-5z"></path></svg>
+          <i class="fa-solid fa-user" aria-hidden="true"></i>
         </a>
       </div>
     </div>
   </header>
 
   <main>
+    <!-- Profile Hero Banner -->
     <section class="profile-banner">
-      <div class="container banner-inner">
-        <div class="big-avatar" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm0 2c-3.33 0-6 2.24-6 5v1h12v-1c0-2.76-2.67-5-6-5z"/></svg>
-        </div>
-        <div>
-          <h1 id="bannerUsername">Watch Enthusiast</h1>
-          <p id="memberSince">Member since January 2026</p>
+      <div class="container">
+        <div class="banner-layout">
+          <div class="banner-avatar-frame">
+            <div class="banner-avatar" id="bannerAvatar">W</div>
+          </div>
+          <div class="banner-info">
+            <div class="banner-badge">MITGLIED</div>
+            <h1 id="bannerUsername">Watch Enthusiast</h1>
+            <p id="memberSince">Seit Januar 2026</p>
+            <div class="banner-stats-mini">
+              <div class="mini-stat">
+                <i class="fa-solid fa-heart" aria-hidden="true"></i>
+                <span id="miniFavCount">0</span>
+              </div>
+              <div class="mini-stat">
+                <i class="fa-solid fa-star" aria-hidden="true"></i>
+                <span id="miniRevCount">0</span>
+              </div>
+            </div>
+          </div>
+          <div class="banner-actions">
+            <button class="btn-profile" id="manageAccountBtn" type="button">
+              <i class="fa-solid fa-gear" aria-hidden="true"></i>
+              Einstellungen
+            </button>
+          </div>
         </div>
       </div>
     </section>
 
+    <!-- Dashboard -->
     <section class="profile-dashboard section">
       <div class="container">
+        <!-- Stat Cards -->
         <div class="stats-grid">
           <article class="stat-card">
-            <h3><span aria-hidden="true">♡</span> Favorites</h3>
-            <strong id="favCount">0</strong>
-            <p>Watches saved</p>
-          </article>
-
-          <article class="stat-card">
-            <h3><span aria-hidden="true">☆</span> Reviews</h3>
-            <strong id="reviewCount">0</strong>
-            <p>Reviews written</p>
-          </article>
-
-          <article class="stat-card">
-            <h3><span aria-hidden="true">⚙</span> Settings</h3>
-            <button class="settings-link" id="manageAccountBtn" type="button" aria-label="Account verwalten">Manage Account</button>
-          </article>
-        </div>
-
-        <h2 class="section-title">Recent Favorites</h2>
-        <div id="favoritesContainer"></div>
-
-        <h2 class="section-title">Recent Reviews</h2>
-        <div id="reviewsContainer"></div>
-
-        <div class="account-grid">
-          <section class="account-card">
-            <h2>Account Information</h2>
-            <div class="account-list">
-              <div><span>Username</span><strong id="profileUsername">Watch Enthusiast</strong></div>
-              <div><span>Email</span><strong id="profileEmail">demo@chronovault.com</strong></div>
-              <div><span>Member Since</span><strong id="profileMemberSince">January 2026</strong></div>
+            <div class="stat-icon">
+              <i class="fa-solid fa-heart" aria-hidden="true"></i>
             </div>
-          </section>
+            <div class="stat-body">
+              <strong id="favCount">0</strong>
+              <span>Favoriten</span>
+            </div>
+          </article>
 
-          <section class="account-card" id="settingsSection">
-            <h2>Account Settings</h2>
-            <form id="settingsForm" class="auth-form" autocomplete="on">
-              <label for="settingsUsername">Username</label>
-              <input id="settingsUsername" name="username" type="text" minlength="2" required>
-              <label for="settingsEmail">Email</label>
-              <input id="settingsEmail" name="email" type="email" required>
-              <label for="settingsPassword">New Password (optional)</label>
-              <input id="settingsPassword" name="password" type="password" minlength="6" placeholder="Leave empty to keep current password">
-              <button type="submit">Save Changes</button>
-              <p id="settingsStatus" class="form-status"></p>
-            </form>
-          </section>
+          <article class="stat-card">
+            <div class="stat-icon">
+              <i class="fa-solid fa-star" aria-hidden="true"></i>
+            </div>
+            <div class="stat-body">
+              <strong id="reviewCount">0</strong>
+              <span>Bewertungen</span>
+            </div>
+          </article>
+
+          <article class="stat-card" id="settingsCard">
+            <div class="stat-icon">
+              <i class="fa-solid fa-gear" aria-hidden="true"></i>
+            </div>
+            <div class="stat-body">
+              <button class="settings-link" id="manageAccountBtn2" type="button">
+                Konto verwalten
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </button>
+            </div>
+          </article>
         </div>
 
-        <section class="account-card" id="authSection">
-          <h2>User System</h2>
-          <p id="authStatus" class="form-status"></p>
+        <!-- Recent Activity Section -->
+        <div class="activity-grid">
+          <div class="activity-column">
+            <div class="activity-header">
+              <i class="fa-solid fa-heart" aria-hidden="true"></i>
+              <h2>Letzte Favoriten</h2>
+            </div>
+            <div id="favoritesContainer" class="activity-container">
+              <div class="activity-loading">
+                <i class="fa-solid fa-circle-notch fa-spin"></i>
+                Lade Favoriten...
+              </div>
+            </div>
+          </div>
+
+          <div class="activity-column">
+            <div class="activity-header">
+              <i class="fa-solid fa-star" aria-hidden="true"></i>
+              <h2>Letzte Bewertungen</h2>
+            </div>
+            <div id="reviewsContainer" class="activity-container">
+              <div class="activity-loading">
+                <i class="fa-solid fa-circle-notch fa-spin"></i>
+                Lade Bewertungen...
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Account Settings Section (visible when authenticated) -->
+        <div id="accountSectionWrapper" style="display:none;">
+          <div class="section-divider">
+            <span>Kontoeinstellungen</span>
+          </div>
+
+          <div class="account-grid">
+            <section class="account-card info-card">
+              <div class="card-head">
+                <i class="fa-solid fa-circle-user" aria-hidden="true"></i>
+                <h2>Account Information</h2>
+              </div>
+              <div class="info-list">
+                <div class="info-row">
+                  <span class="info-label">Benutzername</span>
+                  <strong id="profileUsername">—</strong>
+                </div>
+                <div class="info-row">
+                  <span class="info-label">E-Mail</span>
+                  <strong id="profileEmail">—</strong>
+                </div>
+                <div class="info-row">
+                  <span class="info-label">Mitglied seit</span>
+                  <strong id="profileMemberSince">—</strong>
+                </div>
+              </div>
+            </section>
+
+            <section class="account-card settings-card">
+              <div class="card-head">
+                <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i>
+                <h2>Profil bearbeiten</h2>
+              </div>
+              <form id="settingsForm" class="settings-form" autocomplete="on">
+                <div class="form-field">
+                  <label for="settingsUsername">
+                    <i class="fa-solid fa-user" aria-hidden="true"></i>
+                    <span>Benutzername</span>
+                  </label>
+                  <input id="settingsUsername" name="username" type="text" minlength="2" required>
+                </div>
+                <div class="form-field">
+                  <label for="settingsEmail">
+                    <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                    <span>E-Mail</span>
+                  </label>
+                  <input id="settingsEmail" name="email" type="email" required>
+                </div>
+                <div class="form-field">
+                  <label for="settingsPassword">
+                    <i class="fa-solid fa-lock" aria-hidden="true"></i>
+                    <span>Neues Passwort (optional)</span>
+                  </label>
+                  <input id="settingsPassword" name="password" type="password" minlength="6" placeholder="Leer lassen für aktuelles Passwort">
+                </div>
+                <p id="settingsStatus" class="form-status"></p>
+                <button class="btn-save" type="submit">
+                  <i class="fa-solid fa-floppy-disk" aria-hidden="true"></i>
+                  Änderungen speichern
+                </button>
+              </form>
+            </section>
+          </div>
+        </div>
+
+        <!-- Auth Section (visible when not authenticated) -->
+        <div id="authSectionWrapper">
+          <div class="section-divider">
+            <span>Anmeldung</span>
+          </div>
+
           <div class="auth-grid">
-            <form id="loginForm" class="auth-form" autocomplete="on">
-              <h3>Login</h3>
-              <label for="loginEmail">Email</label>
-              <input id="loginEmail" name="email" type="email" required>
-              <label for="loginPassword">Password</label>
-              <input id="loginPassword" name="password" type="password" required>
-              <button type="submit">Login</button>
+            <form id="loginForm" class="auth-box" autocomplete="on">
+              <div class="auth-box-header">
+                <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i>
+                <h3>Login</h3>
+              </div>
+              <div class="form-field">
+                <label for="loginEmail">
+                  <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                  <span>E-Mail</span>
+                </label>
+                <input id="loginEmail" name="email" type="email" required>
+              </div>
+              <div class="form-field">
+                <label for="loginPassword">
+                  <i class="fa-solid fa-lock" aria-hidden="true"></i>
+                  <span>Passwort</span>
+                </label>
+                <input id="loginPassword" name="password" type="password" required>
+              </div>
+              <button class="btn-auth" type="submit">
+                <i class="fa-solid fa-arrow-right-to-bracket" aria-hidden="true"></i>
+                Anmelden
+              </button>
             </form>
 
-            <form id="registerForm" class="auth-form" autocomplete="on">
-              <h3>Register</h3>
-              <label for="registerUsername">Username</label>
-              <input id="registerUsername" name="username" type="text" minlength="2" required>
-              <label for="registerEmail">Email</label>
-              <input id="registerEmail" name="email" type="email" required>
-              <label for="registerPassword">Password</label>
-              <input id="registerPassword" name="password" type="password" minlength="6" required>
-              <button type="submit">Create Account</button>
+            <form id="registerForm" class="auth-box" autocomplete="on">
+              <div class="auth-box-header">
+                <i class="fa-solid fa-user-plus" aria-hidden="true"></i>
+                <h3>Registrieren</h3>
+              </div>
+              <div class="form-field">
+                <label for="registerUsername">
+                  <i class="fa-solid fa-user" aria-hidden="true"></i>
+                  <span>Benutzername</span>
+                </label>
+                <input id="registerUsername" name="username" type="text" minlength="2" required>
+              </div>
+              <div class="form-field">
+                <label for="registerEmail">
+                  <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                  <span>E-Mail</span>
+                </label>
+                <input id="registerEmail" name="email" type="email" required>
+              </div>
+              <div class="form-field">
+                <label for="registerPassword">
+                  <i class="fa-solid fa-lock" aria-hidden="true"></i>
+                  <span>Passwort</span>
+                </label>
+                <input id="registerPassword" name="password" type="password" minlength="6" required>
+              </div>
+              <button class="btn-auth" type="submit">
+                <i class="fa-solid fa-user-plus" aria-hidden="true"></i>
+                Konto erstellen
+              </button>
             </form>
           </div>
-          <button id="logoutBtn" class="logout-btn" type="button">Logout</button>
-        </section>
+
+          <p id="authStatus" class="form-status auth-status-main"></p>
+
+          <button id="logoutBtn" class="btn-logout" type="button">
+            <i class="fa-solid fa-arrow-right-from-bracket" aria-hidden="true"></i>
+            Abmelden
+          </button>
+        </div>
       </div>
     </section>
   </main>
@@ -165,13 +313,13 @@
         <h3>Follow Us</h3>
         <div class="socials">
           <a class="icon-btn" href="https://instagram.com/chronovault" target="_blank" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm11 1.5a1.5 1.5 0 1 1-1.5 1.5A1.5 1.5 0 0 1 18 5.5zM12 7a5 5 0 1 1-5 5 5 5 0 0 1 5-5zm0 2a3 3 0 1 0 3 3 3 3 0 0 0-3-3z"></path></svg>
+            <i class="fa-brands fa-instagram" aria-hidden="true"></i>
           </a>
           <a class="icon-btn" href="https://facebook.com/chronovault" target="_blank" aria-label="Facebook">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V5h-3c-2.21 0-4 1.79-4 4v3H7v3h3v6h3v-6h3l1-3h-4V9a1 1 0 0 1 1-1z"></path></svg>
+            <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
           </a>
           <a class="icon-btn" href="https://twitter.com/chronovault" target="_blank" aria-label="X">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-6.76 7.73L23 22h-6.08l-4.76-6.23L6.7 22H3.58l7.23-8.25L1 2h6.23l4.3 5.67z"></path></svg>
+            <i class="fa-brands fa-x-twitter" aria-hidden="true"></i>
           </a>
         </div>
       </div>

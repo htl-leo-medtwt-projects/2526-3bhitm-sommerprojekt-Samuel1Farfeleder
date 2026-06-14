@@ -63,6 +63,12 @@ if ($watchId > 0) {
     exit;
 }
 
+$limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 0;
+$random = isset($_GET['random']) && ($_GET['random'] === '1' || $_GET['random'] === 'true');
+
+$orderClause = $random ? 'ORDER BY RAND()' : 'ORDER BY b.name, w.model';
+$limitClause = $limit > 0 ? ' LIMIT ' . $limit : '';
+
 $watchListSql = '
     SELECT
         w.id,
@@ -76,7 +82,7 @@ $watchListSql = '
     JOIN brands b ON b.id = w.brand_id
     LEFT JOIN reviews r ON r.watch_id = w.id
     GROUP BY w.id, b.name, w.model, w.production_year, w.pic
-    ORDER BY b.name, w.model
+    ' . $orderClause . $limitClause . '
 ';
 
 $queryResult = $connection->query($watchListSql);

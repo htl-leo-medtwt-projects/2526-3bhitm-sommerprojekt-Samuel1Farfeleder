@@ -130,7 +130,8 @@ INSERT INTO `users` (`id`, `username`, `email`, `password_hash`, `created_at`) V
 (1, 'Watch Enthusiast', 'demo@chronovault.com', NULL, '2026-04-14 18:20:50'),
 (2, 'TestUser', 'test@example.com', '$2y$10$1/y1QWFiRmlahF38Svk4kea/xwKd6jy7hSwcpfYU7MRwN1whZL7eq', '2026-04-14 18:27:54'),
 (3, 'it230197', 'samuelfarfeleder1709@gmail.com', '$2y$10$gZpDAE6SPfNxg.A4pwEfNOIDriWmGCZRzKbvtWsG6Uvuu9BFdUTRu', '2026-04-14 18:29:07'),
-(4, 'Samuel', 'samuelfarfeleder@gmail.com', '$2y$10$wlaJJu6Jd8F9c439b69f1esVe.f.Us7hLSsqTYmXp0QnKbBNMb396', '2026-04-14 18:47:55');
+(4, 'Samuel', 'samuelfarfeleder@gmail.com', '$2y$10$wlaJJu6Jd8F9c439b69f1esVe.f.Us7hLSsqTYmXp0QnKbBNMb396', '2026-04-14 18:47:55'),
+(5, 'admin', 'admin@chronovault.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '2026-04-14 19:00:00');
 
 -- --------------------------------------------------------
 
@@ -245,7 +246,7 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT für Tabelle `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT für Tabelle `watches`

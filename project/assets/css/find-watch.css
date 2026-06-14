@@ -1,0 +1,659 @@
+/* ============================================
+   Uhrfinder Feed – Dark Theme / Gold Accents
+   ============================================ */
+
+/* ---- Hero ---- */
+.watches-hero {
+  background: linear-gradient(180deg, #121318 0%, #0a0b0d 100%);
+  border-bottom: 1px solid var(--line);
+  padding: 40px 0 55px;
+}
+
+.watches-hero h1 {
+  margin: 0 0 8px;
+  font-size: clamp(2.4rem, 5.8vw, 4.8rem);
+}
+
+.watches-hero .gold {
+  color: var(--gold);
+}
+
+.watches-hero p {
+  margin: 2px 0 0;
+  color: #c2c3c7;
+  font-size: clamp(1rem, 1.8vw, 1.7rem);
+  max-width: 700px;
+}
+
+/* ---- Announce Section ---- */
+.announce-section {
+  padding: 48px 0 78px;
+}
+
+.announce-app {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+/* ---- Post Form Card ---- */
+.post-form-card {
+  background: linear-gradient(145deg, #16181d 0%, #131419 70%);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 28px;
+  margin-bottom: 40px;
+}
+
+.post-form-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+  font-size: 2rem;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 700;
+}
+
+.pfh-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: #17120a;
+  display: grid;
+  place-items: center;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* ---- Form Layout ---- */
+.announce-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-row input[type="text"],
+.form-row textarea {
+  background: #1a1c21;
+  border: 1px solid #383530;
+  border-radius: 12px;
+  padding: 14px 16px;
+  color: var(--text);
+  font-size: 1.5rem;
+  font-family: "Manrope", "Segoe UI", sans-serif;
+  outline: none;
+  transition: border-color 180ms ease;
+  width: 100%;
+}
+
+.form-row input[type="text"]::placeholder,
+.form-row textarea::placeholder {
+  color: #7a7b7f;
+}
+
+.form-row input[type="text"]:focus,
+.form-row textarea:focus {
+  border-color: var(--gold-soft);
+}
+
+.form-row textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* ---- Watch Label ---- */
+.watch-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #d2d3d6;
+  font-size: 1.45rem;
+  margin-bottom: 6px;
+}
+
+.watch-label i {
+  color: var(--gold);
+  font-size: 1.3rem;
+}
+
+/* ---- Custom Select Wrapper ---- */
+.watch-select-wrapper {
+  position: relative;
+}
+
+.watch-select {
+  width: 100%;
+  background: #1a1c21;
+  border: 1px solid #383530;
+  border-radius: 12px;
+  padding: 14px 44px 14px 16px;
+  color: var(--text);
+  font-size: 1.5rem;
+  font-family: "Manrope", "Segoe UI", sans-serif;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  transition: border-color 180ms ease;
+}
+
+.watch-select:focus {
+  border-color: var(--gold-soft);
+}
+
+.watch-select option {
+  background: #1a1c21;
+  color: var(--text);
+  padding: 10px;
+}
+
+.select-arrow {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #a8a9ad;
+  pointer-events: none;
+  font-size: 1.3rem;
+}
+
+/* ---- Selected Watch Preview ---- */
+.selected-watch-preview {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #1a1c21;
+  border: 1px solid var(--gold-soft);
+  border-radius: 12px;
+  padding: 14px;
+  margin-top: 4px;
+  animation: fadeIn 200ms ease;
+}
+
+.swp-image {
+  width: 64px;
+  height: 64px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.swp-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.swp-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.swp-brand {
+  font-size: 1.2rem;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+}
+
+.swp-model {
+  font-size: 1.5rem;
+  color: var(--text);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.swp-clear {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid #515158;
+  background: #3f4044;
+  color: #a8a9ad;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  font-size: 1.6rem;
+  transition: background 160ms ease, color 160ms ease;
+  flex-shrink: 0;
+}
+
+.swp-clear:hover {
+  background: #5a1a1a;
+  border-color: #8b3a3a;
+  color: #ff6b6b;
+}
+
+/* ---- Form Actions ---- */
+.form-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 4px;
+}
+
+.form-actions .btn {
+  min-width: 0;
+  padding: 0 28px;
+  min-height: 52px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  gap: 8px;
+}
+
+.form-status {
+  color: var(--muted);
+  font-size: 1.3rem;
+  flex: 1;
+}
+
+.form-status.success {
+  color: #6fcf97;
+}
+
+.form-status.error {
+  color: #eb5757;
+}
+
+/* ---- Feed Header ---- */
+.feed-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.feed-header i {
+  font-size: 2.2rem;
+  color: var(--gold);
+}
+
+.feed-header h2 {
+  margin: 0;
+  font-size: 2.6rem;
+  font-family: "Cormorant Garamond", Georgia, serif;
+}
+
+/* ---- Feed Loading ---- */
+.feed-loading {
+  text-align: center;
+  padding: 40px 20px;
+  color: #a8a9ad;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+/* ---- Announcements List (Feed) ---- */
+.announcements-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.feed-empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: #a8a9ad;
+  font-size: 1.6rem;
+}
+
+/* ---- Feed Post Card (Instagram-like) ---- */
+.feed-post {
+  background: #15161a;
+  border: 1px solid #2a2920;
+  border-radius: 18px;
+  overflow: hidden;
+  animation: fadeIn 300ms ease;
+}
+
+.feed-post-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+}
+
+.feed-post-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: #17120a;
+  display: grid;
+  place-items: center;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.feed-post-author {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--text);
+}
+
+.feed-post-time {
+  margin-left: auto;
+  font-size: 1.2rem;
+  color: #7a7b7f;
+}
+
+/* ---- Watch Image in Post ---- */
+.feed-post-watch {
+  width: 100%;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  position: relative;
+  max-height: 400px;
+  overflow: hidden;
+}
+
+.feed-post-watch img {
+  max-width: 100%;
+  max-height: 360px;
+  object-fit: contain;
+}
+
+/* ---- Post Body ---- */
+.feed-post-body {
+  padding: 16px 20px 20px;
+}
+
+.feed-post-title {
+  font-size: 1.9rem;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+
+.feed-post-message {
+  font-size: 1.5rem;
+  line-height: 1.5;
+  color: #d2d3d6;
+  margin: 0;
+  word-wrap: break-word;
+}
+
+/* ---- Post Footer / Watch Reference ---- */
+.feed-post-footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px 16px;
+  border-top: 1px solid #2a2920;
+  margin: 0 20px;
+  padding: 12px 0 16px;
+  cursor: pointer;
+  transition: opacity 160ms ease;
+}
+
+.feed-post-footer:hover {
+  opacity: 0.8;
+}
+
+.feed-post-footer i {
+  color: var(--gold);
+  font-size: 1.4rem;
+}
+
+.feed-post-watch-ref {
+  font-size: 1.3rem;
+  color: #a8a9ad;
+}
+
+.feed-post-watch-ref strong {
+  color: var(--gold);
+  font-weight: 700;
+}
+
+/* ---- Post Actions (Kommentar-Button) ---- */
+.feed-post-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 20px 10px;
+}
+
+.feed-post-actions .comment-toggle-btn {
+  background: transparent;
+  border: none;
+  color: #a8a9ad;
+  cursor: pointer;
+  font-size: 1.3rem;
+  font-family: inherit;
+  padding: 6px 12px 6px 6px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 160ms ease, color 160ms ease;
+}
+
+.feed-post-actions .comment-toggle-btn:hover {
+  background: #1f2126;
+  color: var(--gold);
+}
+
+.feed-post-actions .comment-toggle-btn i {
+  font-size: 1.5rem;
+}
+
+.comment-count {
+  color: #7a7b7f;
+  font-size: 1.2rem;
+}
+
+/* ---- Replies Section ---- */
+.feed-post-replies {
+  border-top: 1px solid #2a2920;
+  margin: 0 20px;
+  padding: 0 0 8px;
+}
+
+/* Single Reply */
+.feed-reply {
+  display: flex;
+  gap: 10px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(42, 41, 32, 0.5);
+}
+
+.feed-reply:last-child {
+  border-bottom: none;
+}
+
+.reply-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: #17120a;
+  display: grid;
+  place-items: center;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.reply-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.reply-author {
+  font-weight: 700;
+  font-size: 1.35rem;
+  color: var(--text);
+  margin-right: 6px;
+}
+
+.reply-text {
+  font-size: 1.35rem;
+  color: #d2d3d6;
+  line-height: 1.4;
+  margin: 0;
+  word-wrap: break-word;
+}
+
+.reply-time {
+  font-size: 1.1rem;
+  color: #7a7b7f;
+  margin-top: 4px;
+}
+
+/* ---- Reply Form ---- */
+.reply-form-wrapper {
+  margin: 0 20px;
+  padding: 12px 0 16px;
+  border-top: 1px solid #2a2920;
+}
+
+.reply-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.reply-form-row {
+  display: flex;
+  gap: 10px;
+}
+
+.reply-form-row input[type="text"] {
+  flex: 1;
+  background: #1a1c21;
+  border: 1px solid #383530;
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: var(--text);
+  font-size: 1.35rem;
+  font-family: "Manrope", "Segoe UI", sans-serif;
+  outline: none;
+  transition: border-color 180ms ease;
+}
+
+.reply-form-row input[type="text"]::placeholder {
+  color: #7a7b7f;
+}
+
+.reply-form-row input[type="text"]:focus {
+  border-color: var(--gold-soft);
+}
+
+.reply-form-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.reply-btn {
+  background: transparent;
+  border: 1px solid #383530;
+  color: var(--text);
+  padding: 8px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1.25rem;
+  font-family: inherit;
+  font-weight: 600;
+  transition: background 160ms ease, border-color 160ms ease;
+}
+
+.reply-btn:hover {
+  background: #1f2126;
+  border-color: var(--gold-soft);
+  color: var(--gold);
+}
+
+.reply-btn-primary {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #17120a;
+}
+
+.reply-btn-primary:hover {
+  background: #c9ae5e;
+  border-color: #c9ae5e;
+  color: #17120a;
+}
+
+.reply-cancel-btn {
+  background: transparent;
+  border: none;
+  color: #7a7b7f;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1.25rem;
+  font-family: inherit;
+}
+
+.reply-cancel-btn:hover {
+  color: var(--text);
+}
+
+/* ---- Animations ---- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 640px) {
+  .post-form-card {
+    padding: 20px;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .form-actions .btn {
+    width: 100%;
+  }
+
+  .form-status {
+    text-align: center;
+  }
+
+  .feed-post-header {
+    flex-wrap: wrap;
+  }
+
+  .feed-post-time {
+    margin-left: 0;
+    width: 100%;
+    order: 3;
+  }
+}

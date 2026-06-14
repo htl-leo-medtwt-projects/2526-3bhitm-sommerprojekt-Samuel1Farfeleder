@@ -3,12 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ChronoVault | Uhren</title>
+  <title>ChronoVault | Uhrfinder Feed</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
   <link rel="stylesheet" href="../assets/css/watches.css">
+  <link rel="stylesheet" href="../assets/css/find-watch.css">
 </head>
 <body>
   <header class="site-header" id="top">
@@ -17,22 +18,19 @@
         <span class="brand-mark">C</span>
         <span class="brand-name">ChronoVault</span>
       </a>
-
       <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mainNav" aria-label="Navigation oeffnen">
         <span></span>
         <span></span>
         <span></span>
       </button>
-
       <nav class="main-nav" id="mainNav">
         <a href="startseite.html">Startseite</a>
-        <a class="active" href="watches.html">Uhren</a>
+        <a href="watches.html">Uhren</a>
         <a href="brands.html">Marken</a>
-        <a href="find-watch.html">Uhrfinder</a>
+        <a class="active" href="find-watch.html">Uhrfinder</a>
         <a href="favorites.html">Favoriten</a>
         <a href="profile.html">Profil</a>
       </nav>
-
       <div class="header-actions" aria-label="Schnellaktionen">
         <button class="icon-btn" id="searchBtn" aria-label="Suche" type="button">
           <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
@@ -48,91 +46,81 @@
   </header>
 
   <main>
+    <!-- Hero -->
     <section class="watches-hero">
       <div class="container">
-        <h1>Watch Collection</h1>
-        <p>Filtere die Uhren nach Marke und Baujahr.</p>
-        <div class="search-box">
-          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
-          <input type="text" id="searchInput" placeholder="Suche nach Marke oder Modell" aria-label="Uhren suchen">
-        </div>
+        <h1>Uhr<span class="gold">finder</span></h1>
+        <p>Teile deine Gedanken zu Uhren mit der Community. Wähle eine Uhr aus der Datenbank und verfasse einen Beitrag.</p>
       </div>
     </section>
 
-    <section class="watches-content">
-      <div class="container watches-layout">
-        <aside class="filters-panel">
-          <div class="filters-header">
-            <h2>Filters</h2>
-            <button class="reset-btn" id="resetBtn" type="button">Reset</button>
+    <!-- Post Form + Feed -->
+    <section class="section announce-section">
+      <div class="container">
+        <div class="announce-app">
+          <!-- Create Post Card -->
+          <div class="post-form-card">
+            <div class="post-form-header">
+              <div class="pfh-avatar">U</div>
+              <span>Neuen Beitrag erstellen</span>
+            </div>
+            <form id="announceForm" class="announce-form">
+              <div class="form-row">
+                <input type="text" id="author" placeholder="Dein Name" required maxlength="60">
+              </div>
+              <div class="form-row">
+                <input type="text" id="title" placeholder="Titel (optional)" maxlength="120">
+              </div>
+              <div class="form-row">
+                <textarea id="message" placeholder="Was möchtest du zu dieser Uhr sagen?" rows="3" required maxlength="1000"></textarea>
+              </div>
+              <!-- Watch Selector -->
+              <div class="form-row">
+                <label for="watchSelect" class="watch-label">
+                  <i class="fa-regular fa-clock"></i>
+                  <span>Uhr aus der Datenbank auswählen:</span>
+                </label>
+                <div class="watch-select-wrapper">
+                  <select id="watchSelect" class="watch-select">
+                    <option value="">— Bitte wähle eine Uhr —</option>
+                  </select>
+                  <i class="fa-solid fa-chevron-down select-arrow"></i>
+                </div>
+              </div>
+              <!-- Selected Watch Preview -->
+              <div id="selectedWatchPreview" class="selected-watch-preview" style="display:none">
+                <div class="swp-image">
+                  <img id="selectedWatchImg" src="" alt="Vorschau">
+                </div>
+                <div class="swp-info">
+                  <span class="swp-brand" id="swpBrand"></span>
+                  <span class="swp-model" id="swpModel"></span>
+                </div>
+                <button type="button" id="clearWatchBtn" class="swp-clear" aria-label="Uhr abwählen">
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+              </div>
+              <div class="form-row form-actions">
+                <button class="btn btn-solid" type="submit">
+                  <i class="fa-regular fa-paper-plane"></i>
+                  Beitrag teilen
+                </button>
+                <div id="status" class="form-status"></div>
+              </div>
+            </form>
           </div>
 
-          <div class="filter-group">
-            <h3>Brand</h3>
-            <div class="checkbox-group">
-              <label class="checkbox-label">
-                <input type="checkbox" class="brand-check" value="Rolex">
-                <span>Rolex</span>
-              </label>
-              <label class="checkbox-label">
-                <input type="checkbox" class="brand-check" value="Patek Philippe">
-                <span>Patek Philippe</span>
-              </label>
-              <label class="checkbox-label">
-                <input type="checkbox" class="brand-check" value="Audemars Piguet">
-                <span>Audemars Piguet</span>
-              </label>
-              <label class="checkbox-label">
-                <input type="checkbox" class="brand-check" value="Omega">
-                <span>Omega</span>
-              </label>
-              <label class="checkbox-label">
-                <input type="checkbox" class="brand-check" value="Richard Mille">
-                <span>Richard Mille</span>
-              </label>
-              <label class="checkbox-label">
-                <input type="checkbox" class="brand-check" value="Vacheron Constantin">
-                <span>Vacheron Constantin</span>
-              </label>
+          <!-- Feed -->
+          <div class="feed-header">
+            <i class="fa-regular fa-newspaper"></i>
+            <h2>Aktuelle Beiträge</h2>
+          </div>
+          <div id="announcementsList" class="announcements-list">
+            <div class="feed-loading">
+              <i class="fa-regular fa-circle-notch fa-spin"></i>
+              Beiträge werden geladen...
             </div>
           </div>
-
-          <div class="filter-group">
-            <h3>Year Range</h3>
-            <div class="year-inputs">
-              <div class="year-field">
-                <label for="yearFrom">From</label>
-                <select id="yearFrom" aria-label="Von Jahr">
-                  <option value="">Select year</option>
-                  <option value="2019">2019</option>
-                  <option value="2020">2020</option>
-                  <option value="2021">2021</option>
-                  <option value="2022">2022</option>
-                  <option value="2023">2023</option>
-                  <option value="2024">2024</option>
-                </select>
-              </div>
-              <div class="year-field">
-                <label for="yearTo">To</label>
-                <select id="yearTo" aria-label="Bis Jahr">
-                  <option value="">Select year</option>
-                  <option value="2019">2019</option>
-                  <option value="2020">2020</option>
-                  <option value="2021">2021</option>
-                  <option value="2022">2022</option>
-                  <option value="2023">2023</option>
-                  <option value="2024">2024</option>
-                </select>
-              </div>
-            </div>
-          </div>
-        </aside>
-
-        <div class="watches-main">
-          <div class="results-info">
-            <span id="resultCount">0 watches found</span>
-          </div>
-          <div class="watches-grid" id="watchesGrid"></div>
         </div>
       </div>
     </section>
@@ -147,7 +135,6 @@
         </a>
         <p>ChronoVault ist deine Plattform fuer Luxusuhren. Entdecke ausgewaehlte Modelle, bekannte Manufakturen und zeitlose Klassiker an einem Ort.</p>
       </div>
-
       <div>
         <h3>Entdecken</h3>
         <ul>
@@ -157,8 +144,7 @@
           <li><a href="profile.html">Mein Profil</a></li>
         </ul>
       </div>
-
-     <div>
+      <div>
         <h3>Folge Uns</h3>
         <div class="socials">
           <a class="icon-btn" href="https://www.instagram.com/samuelfarfeleder" aria-label="Instagram">
@@ -173,11 +159,11 @@
         </div>
       </div>
     </div>
-
     <div class="container footer-bottom">Copyright 2026 ChronoVault. Alle Rechte vorbehalten.</div>
   </footer>
 
   <script src="../assets/js/home.js"></script>
   <script src="../assets/js/watches.js"></script>
+  <script src="../assets/js/find-watch.js"></script>
 </body>
 </html>
