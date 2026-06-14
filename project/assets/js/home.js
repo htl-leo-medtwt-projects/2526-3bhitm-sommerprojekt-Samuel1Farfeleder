@@ -36,7 +36,7 @@ document.querySelectorAll(".heart-btn").forEach((button) => {
 });
 
 // Force navigation for Uhrfinder link in case a click is intercepted
-document.querySelectorAll('.main-nav a[href$="find-watch.html"]').forEach((link) => {
+document.querySelectorAll('.main-nav a[href$="announcements.html"]').forEach((link) => {
   link.addEventListener('click', (e) => {
     e.preventDefault();
     const href = link.getAttribute('href');

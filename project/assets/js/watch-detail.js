@@ -127,12 +127,19 @@ function updateFavoriteButtonState(isFavorite) {
   const favBtnText = document.getElementById('favBtnText')
 
   if (favoriteBtn) {
+    const icon = favoriteBtn.querySelector('i')
     if (isFavorite) {
       favoriteBtn.classList.add('is-favorite')
       favoriteBtn.setAttribute('aria-label', 'Aus Favoriten entfernen')
+      if (icon) {
+        icon.className = 'fa-solid fa-heart'
+      }
     } else {
       favoriteBtn.classList.remove('is-favorite')
       favoriteBtn.setAttribute('aria-label', 'Zu Favoriten hinzufügen')
+      if (icon) {
+        icon.className = 'fa-regular fa-heart'
+      }
     }
   }
 

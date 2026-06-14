@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ChronoVault | Uhrfinder Feed</title>
+  <title>ChronoVault | Announcements</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
@@ -27,7 +27,7 @@
         <a href="startseite.html">Startseite</a>
         <a href="watches.html">Uhren</a>
         <a href="brands.html">Marken</a>
-        <a class="active" href="find-watch.html">Uhrfinder</a>
+        <a class="active" href="announcements.html">Announcements</a>
         <a href="favorites.html">Favoriten</a>
         <a href="profile.html">Profil</a>
       </nav>
@@ -46,20 +46,12 @@
   </header>
 
   <main>
-    <!-- Hero -->
-    <section class="watches-hero">
-      <div class="container">
-        <h1>Uhr<span class="gold">finder</span></h1>
-        <p>Teile deine Gedanken zu Uhren mit der Community. Wähle eine Uhr aus der Datenbank und verfasse einen Beitrag.</p>
-      </div>
-    </section>
-
     <!-- Post Form + Feed -->
     <section class="section announce-section">
       <div class="container">
         <div class="announce-app">
-          <!-- Create Post Card -->
-          <div class="post-form-card">
+          <!-- Create Post Card (only visible for admin) -->
+          <div class="post-form-card" style="display:none;">
             <div class="post-form-header">
               <div class="pfh-avatar">U</div>
               <span>Neuen Beitrag erstellen</span>

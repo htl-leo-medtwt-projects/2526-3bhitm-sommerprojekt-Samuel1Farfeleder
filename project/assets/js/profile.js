@@ -58,7 +58,11 @@ function updateAuthUI(authenticated, user = null) {
     // Angemeldet: Profil-Einstellungen anzeigen und Felder mit den aktuellen Daten füllen.
     if (authSectionWrapper) authSectionWrapper.style.display = 'none'
     if (accountSectionWrapper) accountSectionWrapper.style.display = 'block'
-    if (logoutBtn) logoutBtn.style.display = 'flex'
+    if (logoutBtn) {
+      logoutBtn.style.display = 'flex'
+      // Stelle sicher, dass der Logout-Button nicht im authWrapper versteckt ist
+      logoutBtn.style.margin = '20px auto 0'
+    }
     
     if (user) {
       const settingsUsername = document.getElementById('settingsUsername')
