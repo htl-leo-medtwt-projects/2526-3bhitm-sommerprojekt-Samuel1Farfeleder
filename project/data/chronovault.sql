@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db_server
--- Erstellungszeit: 21. Apr 2026 um 14:20
+-- Erstellungszeit: 15. Jun 2026 um 18:45
 -- Server-Version: 9.3.0
 -- PHP-Version: 8.2.27
 
@@ -67,8 +67,6 @@ CREATE TABLE `favorites` (
 
 INSERT INTO `favorites` (`id`, `user_id`, `watch_id`, `created_at`) VALUES
 (1, 1, 1, '2026-04-14 18:20:50'),
-(2, 1, 3, '2026-04-14 18:20:50'),
-(4, 1, 10, '2026-04-14 18:28:41'),
 (5, 1, 4, '2026-04-14 18:28:43'),
 (6, 1, 9, '2026-04-14 18:28:44'),
 (7, 3, 10, '2026-04-14 18:35:28'),
@@ -76,14 +74,21 @@ INSERT INTO `favorites` (`id`, `user_id`, `watch_id`, `created_at`) VALUES
 (9, 3, 4, '2026-04-14 18:35:36'),
 (10, 3, 9, '2026-04-14 18:35:37'),
 (11, 3, 6, '2026-04-14 18:35:38'),
-(12, 4, 10, '2026-04-14 18:48:01'),
 (13, 4, 9, '2026-04-14 18:48:03'),
 (14, 4, 4, '2026-04-14 18:48:04'),
 (15, 4, 6, '2026-04-14 18:48:03'),
-(16, 4, 3, '2026-04-15 06:49:41'),
 (17, 4, 11, '2026-04-15 06:49:54'),
 (18, 4, 5, '2026-04-15 06:49:56'),
-(19, 4, 2, '2026-04-16 06:33:37');
+(19, 4, 2, '2026-04-16 06:33:37'),
+(21, 1, 3, '2026-05-02 10:39:59'),
+(22, 1, 10, '2026-05-04 10:06:22'),
+(24, 4, 10, '2026-05-04 16:47:21'),
+(25, 4, 3, '2026-05-04 16:47:25'),
+(26, 4, 17, '2026-05-04 16:47:27'),
+(27, 4, 16, '2026-05-04 16:52:53'),
+(28, 7, 10, '2026-06-14 12:26:32'),
+(29, 7, 3, '2026-06-14 12:26:37'),
+(30, 8, 10, '2026-06-14 15:30:53');
 
 -- --------------------------------------------------------
 
@@ -106,7 +111,19 @@ CREATE TABLE `reviews` (
 
 INSERT INTO `reviews` (`id`, `user_id`, `watch_id`, `rating`, `comment`, `created_at`) VALUES
 (1, 1, 1, 5, 'An absolute masterpiece. The build quality is unmatched, and it looks stunning on the wrist.', '2026-04-14 18:20:50'),
-(2, 1, 1, 5, 'Worth every penny. The classic design never goes out of style.', '2026-04-14 18:20:50');
+(2, 1, 1, 5, 'Worth every penny. The classic design never goes out of style.', '2026-04-14 18:20:50'),
+(6, 1, 10, 3, 'dfsvd', '2026-05-02 20:20:41'),
+(7, 1, 10, 5, 'cdcdcd', '2026-05-02 20:20:46'),
+(8, 1, 10, 3, 'Sehr gute Uhr aber teuer', '2026-05-04 16:36:35'),
+(9, 4, 10, 4, 'lil', '2026-05-04 16:46:59'),
+(10, 4, 10, 4, 'lul', '2026-05-04 16:56:54'),
+(11, 4, 2, 4, 'lul', '2026-05-04 17:01:48'),
+(12, 4, 10, 3, 'super Uhr', '2026-05-05 13:21:53'),
+(13, 4, 10, 1, 'schlecht', '2026-05-05 13:22:10'),
+(14, 4, 18, 4, 'Super Uhr aber halt viel zu teuer', '2026-06-02 12:41:31'),
+(15, 4, 16, 3, 'super aber teuer', '2026-06-02 13:43:13'),
+(16, 4, 16, 5, 'super', '2026-06-02 13:43:29'),
+(17, 7, 10, 3, 'Super', '2026-06-14 12:27:21');
 
 -- --------------------------------------------------------
 
@@ -127,11 +144,14 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password_hash`, `created_at`) VALUES
-(1, 'Watch Enthusiast', 'demo@chronovault.com', NULL, '2026-04-14 18:20:50'),
+(1, 'lul', 'demo@chronovault.com', NULL, '2026-04-14 18:20:50'),
 (2, 'TestUser', 'test@example.com', '$2y$10$1/y1QWFiRmlahF38Svk4kea/xwKd6jy7hSwcpfYU7MRwN1whZL7eq', '2026-04-14 18:27:54'),
 (3, 'it230197', 'samuelfarfeleder1709@gmail.com', '$2y$10$gZpDAE6SPfNxg.A4pwEfNOIDriWmGCZRzKbvtWsG6Uvuu9BFdUTRu', '2026-04-14 18:29:07'),
-(4, 'Samuel', 'samuelfarfeleder@gmail.com', '$2y$10$wlaJJu6Jd8F9c439b69f1esVe.f.Us7hLSsqTYmXp0QnKbBNMb396', '2026-04-14 18:47:55'),
-(5, 'admin', 'admin@chronovault.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '2026-04-14 19:00:00');
+(4, 'Samuel', 'samuelfarfeleder@gmail.com', '$2y$10$tm3ZwymTlrTZfrwJ/QbEeOLMx35txXefTTKrwlAVozGETTd5FSYy6', '2026-04-14 18:47:55'),
+(5, 'samuel', 'fs@gmail.com', '$2y$10$REJK8Fkh7QhKbA0pZY5ByOznJ47/7drNfJlj4nQkZITA.DKqhD52a', '2026-06-10 09:50:52'),
+(6, 'Admin', 'adi@gmail.com', '$2y$10$LkuMFHTv5DzHmFtR.UkhGOLOOjGvzho.rv1P1SzjyxLQzCjIlXJfW', '2026-06-14 12:04:36'),
+(7, 'Samuel', 's.farfeleder@students.htl-leonding.ac.at', '$2y$10$K/JlKa0X56M0Sdf3e4234./9m0e.Z/SrPId0.6KhuU8vuNnOkxOH6', '2026-06-14 12:26:23'),
+(8, 'ADMIN', 'admin@chronovault.com', '$2y$10$3wKrN3.9pP2MkKSvUacsGurzE9pFYtC7uBW.OugxluV1KImGU9bjG', '2026-06-14 14:10:59');
 
 -- --------------------------------------------------------
 
@@ -234,7 +254,7 @@ ALTER TABLE `brands`
 -- AUTO_INCREMENT für Tabelle `favorites`
 --
 ALTER TABLE `favorites`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT für Tabelle `reviews`
@@ -246,7 +266,7 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT für Tabelle `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT für Tabelle `watches`
